@@ -2,6 +2,8 @@ package L1.recursion.v21;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class MazePaths {
   public static void main(String[] args) {
@@ -18,19 +20,15 @@ public class MazePaths {
       return new ArrayList<>();
     }
 
-    List<String> movesDown = getMazePaths(srcRow+1,srcCol, destRow, destCol);
-    List<String> movesRight = getMazePaths(srcRow, srcCol+1, destRow, destCol);
+    List<String> movesDown = getMazePaths(srcRow+1,srcCol, destRow, destCol)
+      .stream().map(move-> "v"+move)
+      .collect(Collectors.toList());
+    List<String> movesRight = getMazePaths(srcRow, srcCol+1, destRow, destCol)
+      .stream().map(move-> "h"+move)
+      .collect(Collectors.toList());
 
-    List<String> paths = new ArrayList<>();
-
-    for (String down: movesDown) {
-      paths.add("v" + down );
-    }
-
-    for (String right: movesRight) {
-      paths.add("h" + right);
-    }
-
-    return paths;
+    return Stream.of(movesDown,movesRight)
+      .flatMap(List::stream)
+        .collect(Collectors.toList());
   }
 }

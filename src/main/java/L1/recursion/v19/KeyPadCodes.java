@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class KeyPadCodes {
-  private static String[] phoneCodes = {
+  private static final String[] phoneCodes = {
     ".;",
     "abc",
     "def",
@@ -27,7 +27,7 @@ public class KeyPadCodes {
       return arr;
     }
 
-    String start = phoneCodes[(int)(str.charAt(0)-'0')];
+    String start = phoneCodes[str.charAt(0)-'0'];
 
     List<String> codes = getKeyPadCode(str.substring(1));
     List<String> newArr = new ArrayList<>();
@@ -38,6 +38,7 @@ public class KeyPadCodes {
         newArr.add(c+code);
       }
     }
+
     return newArr;
   }
 }
