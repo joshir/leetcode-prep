@@ -1,9 +1,5 @@
 package L1.recursion.v18;
 
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class SubsequencesTwo {
   public static void main(String[] args) {
     getSubSequence("abc", "");
@@ -30,8 +26,5 @@ public class SubsequencesTwo {
     *                    /   \     /  \    /   \    /  \
     *                  ,abc  ,ab  ,ac  ,a ,bc  ,b   ,c  ""
     * */
-
-
-
   }
 }
