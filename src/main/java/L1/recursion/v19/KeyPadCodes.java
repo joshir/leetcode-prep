@@ -2,6 +2,8 @@ package L1.recursion.v19;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class KeyPadCodes {
   private static final String[] phoneCodes = {
@@ -30,15 +32,20 @@ public class KeyPadCodes {
     String start = phoneCodes[str.charAt(0)-'0'];
 
     List<String> codes = getKeyPadCode(str.substring(1));
-    List<String> newArr = new ArrayList<>();
+    //    Option 1
+    //    List<String> newArr = new ArrayList<>();
+    //
+    //    for (int index =0; index < start.length(); index++) {
+    //      char c = start.charAt(index);
+    //      for (String code: codes) {
+    //        newArr.add(c+code);
+    //      }
+    //    }
 
-    for (int index =0; index < start.length(); index++) {
-      char c = start.charAt(index);
-      for (String code: codes) {
-        newArr.add(c+code);
-      }
-    }
-
-    return newArr;
+    // less readable but compact
+    return start.chars()
+      .mapToObj(c-> codes.stream().map(code -> (char)c + code))
+        .flatMap(Stream::distinct)
+        .collect(Collectors.toList());
   }
 }
