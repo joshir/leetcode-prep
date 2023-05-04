@@ -18,13 +18,13 @@ public class SubSequence {
     }
 
     char first = str.charAt(0);
-    List<String> ss = getSubSequence(str.substring(1));
     List<String> newList = new ArrayList<>();
 
-    for (String s : ss) {
+    getSubSequence(str.substring(1)).forEach( s -> {
       newList.add(first + s);
       newList.add("" + s);
-    }
+    });
+
     return newList;
   }
 }

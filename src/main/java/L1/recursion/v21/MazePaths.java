@@ -21,14 +21,10 @@ public class MazePaths {
     }
 
     List<String> movesDown = getMazePaths(srcRow+1,srcCol, destRow, destCol)
-      .stream().map(move-> "v"+move)
-      .collect(Collectors.toList());
+      .stream().map(move-> "v"+move).toList();
     List<String> movesRight = getMazePaths(srcRow, srcCol+1, destRow, destCol)
-      .stream().map(move-> "h"+move)
-      .collect(Collectors.toList());
-
+      .stream().map(move-> "h"+move).toList();
     return Stream.of(movesDown,movesRight)
-      .flatMap(List::stream)
-        .collect(Collectors.toList());
+      .flatMap(List::stream).toList();
   }
 }

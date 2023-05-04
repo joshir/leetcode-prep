@@ -2,7 +2,6 @@ package L1.recursion.v20;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class StairPath {
@@ -19,17 +18,17 @@ public class StairPath {
     }
     List<String>  paths1 = getStairPaths(n-1).stream()
       .map(path->1+path)
-      .collect(Collectors.toList());
+      .toList();
     List<String>  paths2 = getStairPaths(n-2).stream()
       .map(path->2+path)
-      .collect(Collectors.toList());
+      .toList();
     List<String>  paths3 = getStairPaths(n-3).stream()
       .map(path->3+path)
-      .collect(Collectors.toList());
+      .toList();
 
     return
       Stream.of(paths1, paths2, paths3)
         .flatMap(List::stream)
-        .collect(Collectors.toList());
+        .toList();
   }
 }

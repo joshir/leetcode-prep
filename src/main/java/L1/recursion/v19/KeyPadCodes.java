@@ -46,6 +46,6 @@ public class KeyPadCodes {
     return start.chars()
       .mapToObj(c-> codes.stream().map(code -> (char)c + code))
         .flatMap(Stream::distinct)
-        .collect(Collectors.toList());
+        .toList();
   }
 }
