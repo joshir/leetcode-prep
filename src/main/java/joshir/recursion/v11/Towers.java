@@ -13,6 +13,4 @@ public class Towers {
     System.out.println("moving disk " + n + " from "+source+" to "+ dest);
     moveDisks(n-1, aux, dest, source);
   }
-
-
 }

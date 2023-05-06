@@ -3,9 +3,9 @@ package joshir.hmap;
 import java.util.*;
 
 public class PairSum {
-  private static class Pair {
-    Integer x;
-    Integer y;
+  private static final class Pair {
+    final Integer x;
+    final Integer y;
     Pair(Integer x, Integer y) {
       this.x = x;
       this.y = y;

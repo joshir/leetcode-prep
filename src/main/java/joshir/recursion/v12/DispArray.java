@@ -12,5 +12,4 @@ public class DispArray {
     System.out.println(arr[start]);
     dispArray(arr, start+1);
   }
-
 }
