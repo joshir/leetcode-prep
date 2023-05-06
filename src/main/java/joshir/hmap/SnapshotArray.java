@@ -25,6 +25,8 @@ public class SnapshotArray {
   private static class Snappy {
     private static int snap = 0;
     private static Map<Integer, Integer>[] snapMap;
+
+    @SuppressWarnings("unchecked")
     Snappy (int len) {
       snapMap = (Map<Integer, Integer>[]) new HashMap<?, ?>[len];
       for (int index = 0; index < len; index++){
