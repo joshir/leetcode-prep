@@ -20,8 +20,6 @@ public class NextSmallerLeft {
       items[index] = stack.size() > 0? stack.peekLast(): -1;
       stack.add(arr[index]);
     });
-
-
     return items;
   }
   public static void main(String[] args) {
