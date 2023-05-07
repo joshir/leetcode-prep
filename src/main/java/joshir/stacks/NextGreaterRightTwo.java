@@ -5,7 +5,7 @@ import java.util.LinkedList;
 
 public class NextGreaterRightTwo {
   public static void main(String[] args) {
-    int arr[] = {1,6,2,4,5,9,11,22,8,10,51};
+    int arr[] = {5,6,7,1,2,3,9};
     System.out.println(Arrays.toString(arr));
     System.out.println(Arrays.toString( fillGreaterRight(arr)));
   }
@@ -16,7 +16,7 @@ public class NextGreaterRightTwo {
     stack.add(0);
     int index = 0;
     while (++index < arr.length) {
-
+      System.out.println(Arrays.toString(stack.toArray()));
       while(stack.size() > 0 && arr[index] > arr[stack.peekLast()])
         ngr[stack.removeLast()] = arr[index];
       stack.add(index);

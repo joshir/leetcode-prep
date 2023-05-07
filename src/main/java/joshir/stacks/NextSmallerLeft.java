@@ -1,2 +1,4 @@
-package joshir.stacks;public class NextSmallerLeft {
+package joshir.stacks;
+
+public class NextSmallerLeft {
 }
