@@ -5,7 +5,7 @@ import java.util.LinkedList;
 
 public class NextGreaterRight {
   public static void main(String[] args) {
-    int arr[] = {1,6,2,4,5,9,11,22,8,10,51};
+    int[] arr = {1,6,2,4,5,9,11,22,8,10,51};
     System.out.println(Arrays.toString(arr));
     System.out.println(Arrays.toString( fillGreaterRight(arr)));
   }

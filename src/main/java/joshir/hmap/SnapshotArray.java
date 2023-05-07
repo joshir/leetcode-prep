@@ -5,11 +5,10 @@ import java.util.Map;
 
 public class SnapshotArray {
   private static Snappy snappy;
-  public static void main(String[] args) {
-  }
   public SnapshotArray (int length) {
     snappy = new Snappy(length);
   }
+
   public int snap() {
     return snappy.snap();
   }
@@ -27,7 +26,7 @@ public class SnapshotArray {
     private static Map<Integer, Integer>[] snapMap;
 
     @SuppressWarnings("unchecked")
-    Snappy (int len) {
+    public Snappy (int len) {
       snapMap = (Map<Integer, Integer>[]) new HashMap<?, ?>[len];
       for (int index = 0; index < len; index++){
         snapMap[index] = new HashMap<>();

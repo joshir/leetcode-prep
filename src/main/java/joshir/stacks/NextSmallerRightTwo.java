@@ -22,7 +22,7 @@ public class NextSmallerRightTwo {
     return nsr;
   }
   public static void main(String[] args) {
-    int arr[] = {5,7,8,6,4,3,2,9,10,1};
+    int[] arr = {5,7,8,6,4,3,2,9,10,1};
     System.out.println(Arrays.toString(arr));
     System.out.println(Arrays.toString( fillSmallerRight(arr)));
   }
