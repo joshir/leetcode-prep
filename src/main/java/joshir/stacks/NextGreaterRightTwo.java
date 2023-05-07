@@ -16,7 +16,6 @@ public class NextGreaterRightTwo {
     stack.add(0);
     int index = 0;
     while (++index < arr.length) {
-      System.out.println(Arrays.toString(stack.toArray()));
       while(stack.size() > 0 && arr[index] > arr[stack.peekLast()])
         ngr[stack.removeLast()] = arr[index];
       stack.add(index);

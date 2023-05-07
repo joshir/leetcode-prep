@@ -14,14 +14,12 @@ public class NextSmallerRight {
     int index = arr.length - 1;
     while (--index >= 0) {
 
-      while(stack.size() > 0 && stack.peekLast() < arr[index]) {
+      while(stack.size() > 0 && stack.peekLast() > arr[index]) {
         stack.removeLast();
       }
 
-      if(stack.size() == 0)
-        ngr[index] = -1;
-      else
-        ngr[index] = stack.peekLast();
+      ngr[index] = stack.size() == 0 ? -1 : stack.peekLast();
+
       stack.add(arr[index]);
     }
     return ngr;
