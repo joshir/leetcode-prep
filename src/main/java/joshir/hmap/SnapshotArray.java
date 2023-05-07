@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class SnapshotArray {
   private static Snappy snappy;
+
   public SnapshotArray (int length) {
     snappy = new Snappy(length);
   }
