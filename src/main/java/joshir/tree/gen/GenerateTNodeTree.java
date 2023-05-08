@@ -115,12 +115,12 @@ public class GenerateTNodeTree {
   }
 
   public static int maximum(TNode<Integer> node) {
-    if(node == null) return 0;
-    return Math.max(
-      node.data,
-      node.children.stream()
-        .max(Comparator.comparing(n -> n.data)).get().data
-    );
+    if(node == null) return Integer.MIN_VALUE;
+    int max = node.data;
+    for(var n: node.children){
+      max = Math.max(max, maximum(n));
+    }
+    return max;
   }
 
   public static int edgeLength(TNode<Integer> node) {
