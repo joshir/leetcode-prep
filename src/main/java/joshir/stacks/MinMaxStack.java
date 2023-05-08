@@ -11,18 +11,17 @@ public class MinMaxStack<T extends Comparable<? super T>> {
   /* main backing store */
   private final T[] backing;
 
-  /* store for mins or maxs*/
+  /* store for mins*/
   private final T[] minimums;
 
+  /* store for mins*/
   private final T[] maximums;
-
 
   private int tos = -1;
 
   private int mintop = -1;
 
   private int maxtop = -1;
-
 
   public MinMaxStack() {
     this(20);
