@@ -29,9 +29,9 @@ public class MinMaxStack<T extends Comparable<? super T>> {
 
   @SuppressWarnings("unchecked")
   public MinMaxStack (int size) {
-    backing = (T[]) new Comparable[size];
-    minimums = (T[]) new Comparable[size];
-    maximums = (T[]) new Comparable[size];
+    backing = (T[]) new Comparable<?>[size];
+    minimums = (T[]) new Comparable<?>[size];
+    maximums = (T[]) new Comparable<?>[size];
   }
 
   public void push(T el) {
