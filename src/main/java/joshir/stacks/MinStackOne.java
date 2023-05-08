@@ -43,18 +43,6 @@ public class MinStackOne {
       if(minimums[min].equals(backing[tos])){
         min--;
       }
-      else {
-        int tmin = min;
-        while(--tmin>-1){
-          if(backing[min].equals(minimums[tmin])) {
-            while(tmin!=min ){
-              minimums[tmin] = minimums[tmin+1];
-              tmin++;
-            }
-            break;
-          }
-        }
-      }
       return backing[tos--];
     }
 
@@ -64,11 +52,11 @@ public class MinStackOne {
       return minimums[min];
     }
 
-    int size(){return tos+1;}
+    int isRemaining() {return tos;}
   }
 
   public static void main(String[] args) {
-    int[] nums = new int[]{31, 22, 9, 10, 11, 3, 99, 39, 1};
+    int[] nums = new int[]{31, 22, 9, 10, 11, 2 , 3, 99, 1, 39};
     System.out.println(Arrays.toString(nums));
     for (Integer i: nums){
       stack.push(i);
@@ -77,9 +65,9 @@ public class MinStackOne {
 
     System.out.println();
 
-    while(stack.size()>0){
-      System.out.print(stack.min()+", ");
+    while(stack.isRemaining() >0){
       stack.pop();
+      System.out.print(stack.min()+", ");
     }
   }
 }
