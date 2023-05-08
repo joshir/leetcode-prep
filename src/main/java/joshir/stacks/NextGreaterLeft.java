@@ -12,12 +12,9 @@ public class NextGreaterLeft {
     ngl[0] = -1;
     stack.add(arr[0]);
     for(int index = 1; index < arr.length; index++){
-
       while(stack.size()>0 && arr[index] > stack.peekLast())
         stack.removeLast();
-
       ngl[index] = stack.size() == 0 ? -1: stack.peekLast();
-
       stack.add(arr[index]);
     }
 
