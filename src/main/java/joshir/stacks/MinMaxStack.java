@@ -1,9 +1,10 @@
 package joshir.stacks;
 
 import java.util.EmptyStackException;
+import java.util.Objects;
 
 /*
-* Simple min/max stack for any Comparable type using two backing array
+* Simple min/max stack for any Comparable type using backing arrays
 * with O(1) min or max lookups and O(N) extra space
 * */
 public class MinMaxStack<T extends Comparable<? super T>> {
@@ -14,7 +15,7 @@ public class MinMaxStack<T extends Comparable<? super T>> {
   /* store for mins*/
   private final T[] minimums;
 
-  /* store for mins*/
+  /* store for maxs*/
   private final T[] maximums;
 
   private int tos = -1;
@@ -36,6 +37,7 @@ public class MinMaxStack<T extends Comparable<? super T>> {
 
   public void push(T el) {
     if (tos>=backing.length) throw new StackOverflowError();
+    Objects.requireNonNull(el, "Argument must not be null");
     if (isEmpty()) {
       backing[++tos] = el;
       minimums[++mintop] = el;
@@ -52,7 +54,7 @@ public class MinMaxStack<T extends Comparable<? super T>> {
 
   public T pop() {
     if (isEmpty()) throw new EmptyStackException();
-    if(minimums[mintop].equals(backing[tos])){
+    else if (minimums[mintop].equals(backing[tos])){
       mintop--;
     }
     else if (maximums[maxtop].equals(backing[tos])) {
@@ -62,14 +64,12 @@ public class MinMaxStack<T extends Comparable<? super T>> {
   }
 
   public T min() {
-    if(isEmpty())
-      throw new EmptyStackException();
+    if(isEmpty()) throw new EmptyStackException();
     return minimums[mintop];
   }
 
   public T max() {
-    if(isEmpty())
-      throw new EmptyStackException();
+    if(isEmpty()) throw new EmptyStackException();
     return maximums[maxtop];
   }
 
