@@ -1,7 +1,6 @@
 package joshir.tree.gen;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -23,7 +22,7 @@ public class GenerateTNodeTree {
     60, 601, 6001, -1, 6002, -1, -1, -1
   );
 
-  private static final class TNode<T> {
+  private static final class TNode<T extends Number> {
 
     /* package public by default */
     final T data;
@@ -58,6 +57,7 @@ public class GenerateTNodeTree {
   * */
   private static void displayInDepth(TNode<Integer> root) {
     if(root == null) return;
+
     System.out.println(root.data);
     root.children.forEach(GenerateTNodeTree::displayInDepth);
   }
@@ -116,6 +116,7 @@ public class GenerateTNodeTree {
 
   public static int maximum(TNode<Integer> node) {
     if(node == null) return Integer.MIN_VALUE;
+
     return node.children
       .stream()
       .reduce(node.data,
@@ -126,6 +127,7 @@ public class GenerateTNodeTree {
 
   public static int edgeLength(TNode<Integer> node) {
     if(node == null) return 0;
+
     return node.children
       .stream()
       .reduce(0,
