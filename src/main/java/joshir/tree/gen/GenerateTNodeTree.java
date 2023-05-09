@@ -55,6 +55,8 @@ public class GenerateTNodeTree {
     displayTreeBreadth(root);
     pruneLeaves(root);
     displayTreeBreadth(root);
+    System.out.println(search(root,601));
+    System.out.println(search(root,301));
   }
 
   /*
@@ -196,8 +198,19 @@ public class GenerateTNodeTree {
   * remove leaves where possible
   * */
   public static void pruneLeaves(final TNode<Integer> root){
-    if(root == null) return;
     root.children.removeIf(node-> node.children.isEmpty());
     root.children.forEach(GenerateTNodeTree::pruneLeaves);
+  }
+
+  /*
+  * find an element in the tree that looks like data
+  * */
+  public static boolean search(final TNode<Integer> root, int data){
+    if(root.data == data) return true;
+    boolean res = false;
+    for(var node: root.children){
+      if(res = search(node,data)) break;
+    }
+    return res;
   }
 }
