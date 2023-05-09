@@ -1,6 +1,7 @@
 package joshir.tree.gen;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -36,8 +37,10 @@ public class GenerateTNodeTree {
   }
 
   private static final class TNodeTree<T extends Number> {
+    /* package public by default */
     final TNode<T> root;
 
+    /* package public by default */
     TNodeTree(TNode<T> root) {
       this.root = root;
     }
@@ -45,8 +48,6 @@ public class GenerateTNodeTree {
 
   public static void main(String[] args) {
     TNode<Integer> root = generate().root;
-    displayInDepth(root);
-    displayTreeBreadth(root);
     System.out.println("size " + size(root));
     System.out.println("max " + maximum(root));
     System.out.println("edge height " + edgeLength(root));
@@ -55,7 +56,7 @@ public class GenerateTNodeTree {
   /*
   * depth traversal: find leaf and return
   * */
-  private static void displayInDepth(TNode<Integer> root) {
+  private static void displayInDepth(final TNode<Integer> root) {
     if(root == null) return;
 
     System.out.println(root.data);
@@ -65,7 +66,7 @@ public class GenerateTNodeTree {
   /*
   * breadth-first traversal: find siblings and repeat
   * */
-  private static void displayTreeBreadth(TNode<Integer> root) {
+  private static void displayTreeBreadth(final TNode<Integer> root) {
     if(root == null) return;
 
     if(!root.children.isEmpty()){
@@ -74,6 +75,21 @@ public class GenerateTNodeTree {
       System.out.println();
     }
     root.children.forEach(GenerateTNodeTree::displayTreeBreadth);
+  }
+
+  /*
+   * breadth-first traversal: find siblings and repeat
+   * */
+  private static void displayTreeBreadthUsingQueue(final TNode<Integer> root) {
+    LinkedList<TNode<Integer>> queue = new LinkedList<>();
+    TNode<Integer> node;
+
+    queue.add(root);
+    while (queue.size()>0){
+      node = queue.removeFirst();
+      System.out.print(node.data+" ");
+      queue.addAll(node.children);
+    }
   }
 
   /*
@@ -103,7 +119,7 @@ public class GenerateTNodeTree {
   }
 
 
-  public static int size(TNode<Integer> node){
+  public static int size(final TNode<Integer> node){
     if(node == null) return 0;
 
     return node.children
@@ -114,7 +130,7 @@ public class GenerateTNodeTree {
       );
   }
 
-  public static int maximum(TNode<Integer> node) {
+  public static int maximum(final TNode<Integer> node) {
     if(node == null) return Integer.MIN_VALUE;
 
     return node.children
@@ -125,7 +141,7 @@ public class GenerateTNodeTree {
       );
   }
 
-  public static int edgeLength(TNode<Integer> node) {
+  public static int edgeLength(final TNode<Integer> node) {
     if(node == null) return 0;
 
     return node.children
@@ -134,5 +150,14 @@ public class GenerateTNodeTree {
         (partialHeight, n) -> Math.max( 1 + edgeLength(n), partialHeight),
         Integer::sum
       );
+  }
+
+  /*
+  * mirror the tree at each level by reversing the children
+  * */
+  public static TNode<Integer>  reflect(final TNode<Integer> root) {
+    root.children.forEach(GenerateTNodeTree::reflect);
+    Collections.reverse(root.children);
+    return root;
   }
 }
