@@ -1,11 +1,9 @@
 package joshir.tree.gen;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /*
 * generate tree from a list of numbers
@@ -51,12 +49,12 @@ public class GenerateTNodeTree {
   public static void main(String[] args) {
     TNodeTree<Integer> tree = generate();
     TNode<Integer> root = tree.root;
-    TNode<Integer> copy = reflect(copy(tree).root);
     System.out.println("size " + size(root));
     System.out.println("max " + maximum(root));
     System.out.println("edge height " + edgeLength(root));
-    displayTreeBreadth(copy);
-    displayTreeBreadth(tree.root);
+    displayTreeBreadth(root);
+    pruneLeaves(root);
+    displayTreeBreadth(root);
   }
 
   /*
@@ -73,13 +71,10 @@ public class GenerateTNodeTree {
   * breadth-first traversal: find siblings and repeat
   * */
   private static void displayTreeBreadth(final TNode<Integer> root) {
-    if(root == null) return;
 
-    if(!root.children.isEmpty()){
       System.out.print(root.data+ " ~> ");
       root.children.forEach(node -> System.out.print(node.data+" "));
       System.out.println();
-    }
     root.children.forEach(GenerateTNodeTree::displayTreeBreadth);
   }
 
@@ -125,6 +120,9 @@ public class GenerateTNodeTree {
   }
 
 
+  /*
+  * find the number of vertices in the tree
+  * */
   public static int size(final TNode<Integer> node){
     if(node == null) return 0;
 
@@ -136,6 +134,10 @@ public class GenerateTNodeTree {
       );
   }
 
+
+  /*
+  * find max element in current tree
+  * */
   public static int maximum(final TNode<Integer> node) {
     if(node == null) return Integer.MIN_VALUE;
 
@@ -147,6 +149,10 @@ public class GenerateTNodeTree {
       );
   }
 
+  /*
+  * count edges between root node and
+  * the leaf at maximum depth from the root
+  * */
   public static int edgeLength(final TNode<Integer> node) {
     if(node == null) return 0;
 
@@ -172,8 +178,7 @@ public class GenerateTNodeTree {
    * */
   public static TNode<Integer> copy (final TNode<Integer> root) {
     TNode<Integer> tnode = new TNode<>(root.data);
-    if(root.children.isEmpty()) return root;
-    tnode.children.addAll(root.children.stream().map(x->copy(x)).toList());
+    tnode.children.addAll(root.children.stream().map(GenerateTNodeTree::copy).toList());
     return tnode;
   }
 
@@ -182,5 +187,14 @@ public class GenerateTNodeTree {
   * */
   public static TNodeTree<Integer> copy (final TNodeTree<Integer> tree) {
     return new TNodeTree<>(copy(tree.root));
+  }
+
+  /*
+  * remove leaves where possible
+  * */
+  public static void pruneLeaves(final TNode<Integer> root){
+    if(root == null) return;
+    root.children.removeIf(node-> node.children.isEmpty());
+    root.children.forEach(GenerateTNodeTree::pruneLeaves);
   }
 }
