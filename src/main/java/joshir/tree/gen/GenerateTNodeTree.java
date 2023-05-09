@@ -70,11 +70,14 @@ public class GenerateTNodeTree {
   /*
   * breadth-first traversal: find siblings and repeat
   * */
-  private static void displayTreeBreadth(final TNode<Integer> root) {
+  private static void displayTreeBreadth(TNode<Integer> root) {
+    if(root == null) return;
 
+    if(!root.children.isEmpty()){
       System.out.print(root.data+ " ~> ");
       root.children.forEach(node -> System.out.print(node.data+" "));
       System.out.println();
+    }
     root.children.forEach(GenerateTNodeTree::displayTreeBreadth);
   }
 
@@ -167,7 +170,7 @@ public class GenerateTNodeTree {
   /*
   * mirror the tree at each level by reversing the children
   * */
-  public static TNode<Integer>  reflect(final TNode<Integer> root) {
+  public static TNode<Integer> reflect(final TNode<Integer> root) {
     root.children.forEach(GenerateTNodeTree::reflect);
     Collections.reverse(root.children);
     return root;
