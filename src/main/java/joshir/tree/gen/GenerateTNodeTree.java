@@ -1,9 +1,11 @@
 package joshir.tree.gen;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /*
 * generate tree from a list of numbers
@@ -47,10 +49,14 @@ public class GenerateTNodeTree {
   }
 
   public static void main(String[] args) {
-    TNode<Integer> root = generate().root;
+    TNodeTree<Integer> tree = generate();
+    TNode<Integer> root = tree.root;
+    TNode<Integer> copy = reflect(copy(tree).root);
     System.out.println("size " + size(root));
     System.out.println("max " + maximum(root));
     System.out.println("edge height " + edgeLength(root));
+    displayTreeBreadth(copy);
+    displayTreeBreadth(tree.root);
   }
 
   /*
@@ -159,5 +165,22 @@ public class GenerateTNodeTree {
     root.children.forEach(GenerateTNodeTree::reflect);
     Collections.reverse(root.children);
     return root;
+  }
+
+  /*
+   * make an exact copy of given node and return the new node
+   * */
+  public static TNode<Integer> copy (final TNode<Integer> root) {
+    TNode<Integer> tnode = new TNode<>(root.data);
+    if(root.children.isEmpty()) return root;
+    tnode.children.addAll(root.children.stream().map(x->copy(x)).toList());
+    return tnode;
+  }
+
+  /*
+  * make an exact copy of given tree and return the new tree
+  * */
+  public static TNodeTree<Integer> copy (final TNodeTree<Integer> tree) {
+    return new TNodeTree<>(copy(tree.root));
   }
 }
