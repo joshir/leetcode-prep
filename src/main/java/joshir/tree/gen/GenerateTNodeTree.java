@@ -1,9 +1,6 @@
 package joshir.tree.gen;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /*
 * generate tree from a list of numbers
@@ -34,6 +31,11 @@ public class GenerateTNodeTree {
     TNode(T data) {
       this.data = data;
     }
+
+    @Override
+    public String toString(){
+      return data.toString();
+    }
   }
 
   private static final class TNodeTree<T extends Number> {
@@ -57,6 +59,7 @@ public class GenerateTNodeTree {
     displayTreeBreadth(root);
     System.out.println(search(root,601));
     System.out.println(search(root,301));
+    searchPath(root,301).forEach(System.out::println);
   }
 
   /*
@@ -212,5 +215,29 @@ public class GenerateTNodeTree {
       if(res = search(node,data)) break;
     }
     return res;
+  }
+
+
+  /*
+  * returns a list of nodes, "path," from root to
+  * the node containing the data point passed as a param
+  * returns an empty path if node is not found
+  * */
+  public static List<TNode<Integer>> searchPath(final TNode<Integer> root, int data){
+    if (root.data == data) {
+      List<TNode<Integer>> list = new LinkedList<>();
+      list.add(root);
+      return list;
+    }
+
+    LinkedList<TNode<Integer>> path = new LinkedList<>();
+    for(var node: root.children){
+      path.addAll(searchPath(node, data));
+      if(!path.isEmpty()){
+        path.addFirst(root);
+        break;
+      }
+    }
+    return path;
   }
 }
