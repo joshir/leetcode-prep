@@ -1,6 +1,7 @@
 package joshir.tree.gen;
 
 import java.util.*;
+import java.util.stream.IntStream;
 
 /*
 * generate tree from a list of numbers
@@ -59,7 +60,7 @@ public class ListTNodeTree {
     displayTreeBreadth(root);
     System.out.println(search(root,601));
     System.out.println(search(root,301));
-    searchPath(root,301).forEach(System.out::println);
+    List<TNode<Integer>> path = searchPath(root,301);
   }
 
   /*
@@ -242,9 +243,15 @@ public class ListTNodeTree {
   }
 
   /*
-  * lowest common ancestor of nodes
+  * lowest common ancestor of nodes in the tree
+  * return root
   * */
-  public static TNode<Integer> lca(int val1, int val2) {
-    return null;
+  public static TNode<Integer> lca(final TNode<Integer> root, int val1, int val2) {
+    List<TNode<Integer>> path1 = searchPath(root, val1), path2 = searchPath(root, val2);
+    int index;
+
+    for(index = 0; index < Math.min(path1.size(), path2.size()) && path1.get(index).equals(path2.get(index)); index++) ;
+
+    return index == 0 ? root: path1.get(index);
   }
 }
