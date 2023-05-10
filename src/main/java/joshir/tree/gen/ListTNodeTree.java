@@ -177,6 +177,7 @@ public class ListTNodeTree {
   * mirror the tree at each level by reversing the children
   * */
   public static TNode<Integer> reflect(final TNode<Integer> root) {
+    Objects.requireNonNull(root, "Argument must not be null");
     root.children.forEach(ListTNodeTree::reflect);
     Collections.reverse(root.children);
     return root;
@@ -186,6 +187,7 @@ public class ListTNodeTree {
    * make an exact copy of given node and return the new node
    * */
   public static TNode<Integer> copy (final TNode<Integer> root) {
+    Objects.requireNonNull(root, "Argument must not be null");
     TNode<Integer> tnode = new TNode<>(root.data);
     tnode.children.addAll(root.children.stream().map(ListTNodeTree::copy).toList());
     return tnode;
@@ -195,6 +197,7 @@ public class ListTNodeTree {
   * make an exact copy of given tree and return the new tree
   * */
   public static TNodeTree<Integer> copy (final TNodeTree<Integer> tree) {
+    Objects.requireNonNull(tree, "Argument must not be null");
     return new TNodeTree<>(copy(tree.root));
   }
 
@@ -202,6 +205,7 @@ public class ListTNodeTree {
   * remove leaves where possible
   * */
   public static void pruneLeaves(final TNode<Integer> root){
+    Objects.requireNonNull(root, "Argument must not be null");
     root.children.removeIf(node-> node.children.isEmpty());
     root.children.forEach(ListTNodeTree::pruneLeaves);
   }
@@ -210,6 +214,7 @@ public class ListTNodeTree {
   * find an element in the tree that looks like data
   * */
   public static boolean search(final TNode<Integer> root, int data){
+    Objects.requireNonNull(root, "Argument must not be null");
     if(root.data == data) return true;
     boolean res = false;
     for(var node: root.children){
@@ -225,6 +230,7 @@ public class ListTNodeTree {
   * returns an empty path if node is not found
   * */
   public static List<TNode<Integer>> searchPath(final TNode<Integer> root, int data){
+    Objects.requireNonNull(root, "Argument must not be null");
     if (root.data == data) {
       List<TNode<Integer>> list = new LinkedList<>();
       list.add(root);
