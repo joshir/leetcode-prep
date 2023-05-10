@@ -244,7 +244,7 @@ public class ListTNodeTree {
 
   /*
   * lowest common ancestor of nodes in the tree
-  * return root
+  * return root if no
   * */
   public static TNode<Integer> lca(final TNode<Integer> root, int val1, int val2) {
     List<TNode<Integer>> path1 = searchPath(root, val1), path2 = searchPath(root, val2);
@@ -252,6 +252,6 @@ public class ListTNodeTree {
 
     for(index = 0; index < Math.min(path1.size(), path2.size()) && path1.get(index).equals(path2.get(index)); index++) ;
 
-    return index == 0 ? root: path1.get(index);
+    return index == 0 ? null: path1.get(index);
   }
 }
