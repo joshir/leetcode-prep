@@ -5,7 +5,7 @@ import java.util.*;
 /*
 * generate tree from a list of numbers
 * */
-public class GenerateTNodeTree {
+public class ListTNodeTree {
 
   /*
    * tree as a list with marker -1 to indicate
@@ -69,7 +69,7 @@ public class GenerateTNodeTree {
     if(root == null) return;
 
     System.out.println(root.data);
-    root.children.forEach(GenerateTNodeTree::displayInDepth);
+    root.children.forEach(ListTNodeTree::displayInDepth);
   }
 
   /*
@@ -83,7 +83,7 @@ public class GenerateTNodeTree {
       root.children.forEach(node -> System.out.print(node.data+" "));
       System.out.println();
     }
-    root.children.forEach(GenerateTNodeTree::displayTreeBreadth);
+    root.children.forEach(ListTNodeTree::displayTreeBreadth);
   }
 
   /*
@@ -176,7 +176,7 @@ public class GenerateTNodeTree {
   * mirror the tree at each level by reversing the children
   * */
   public static TNode<Integer> reflect(final TNode<Integer> root) {
-    root.children.forEach(GenerateTNodeTree::reflect);
+    root.children.forEach(ListTNodeTree::reflect);
     Collections.reverse(root.children);
     return root;
   }
@@ -186,7 +186,7 @@ public class GenerateTNodeTree {
    * */
   public static TNode<Integer> copy (final TNode<Integer> root) {
     TNode<Integer> tnode = new TNode<>(root.data);
-    tnode.children.addAll(root.children.stream().map(GenerateTNodeTree::copy).toList());
+    tnode.children.addAll(root.children.stream().map(ListTNodeTree::copy).toList());
     return tnode;
   }
 
@@ -202,7 +202,7 @@ public class GenerateTNodeTree {
   * */
   public static void pruneLeaves(final TNode<Integer> root){
     root.children.removeIf(node-> node.children.isEmpty());
-    root.children.forEach(GenerateTNodeTree::pruneLeaves);
+    root.children.forEach(ListTNodeTree::pruneLeaves);
   }
 
   /*
@@ -212,7 +212,7 @@ public class GenerateTNodeTree {
     if(root.data == data) return true;
     boolean res = false;
     for(var node: root.children){
-      if(res = search(node,data)) break;
+      if(res = search(node, data)) break;
     }
     return res;
   }
@@ -239,5 +239,12 @@ public class GenerateTNodeTree {
       }
     }
     return path;
+  }
+
+  /*
+  * lowest common ancestor of nodes
+  * */
+  public static TNode<Integer> lca(int val1, int val2) {
+    return null;
   }
 }
