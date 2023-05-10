@@ -186,7 +186,7 @@ public class ListTNodeTree {
   /*
    * make an exact copy of given node and return the new node
    * */
-  public static TNode<Integer> copy (final TNode<Integer> root) {
+  private static TNode<Integer> copy (final TNode<Integer> root) {
     Objects.requireNonNull(root, "Argument must not be null");
     TNode<Integer> tnode = new TNode<>(root.data);
     tnode.children.addAll(root.children.stream().map(ListTNodeTree::copy).toList());
