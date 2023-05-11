@@ -1,7 +1,10 @@
 package joshir.tree.btree;
 
+import joshir.tree.gen.ListTNodeTree;
+
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 public class BTreeGen {
   /*
@@ -32,6 +35,9 @@ public class BTreeGen {
     4001, -1,
     4002, -1, -1, -1,
     -1
+  );
+  private static final List<Integer> tree1 = List.of(
+          10,-1
   );
   private static class TNode<T extends Comparable<? super T>> {
     /* package public by default*/
@@ -66,6 +72,7 @@ public class BTreeGen {
   public static void main(String[] args) {
     TNodeTree<Integer> tree = generate();
     TNode<Integer> root = tree.root;
+    TNodeTree<Integer> nTree= copy(tree);
   }
 
   /*
@@ -96,5 +103,24 @@ public class BTreeGen {
         stack.removeLast();
     }
     return top;
+  }
+
+  /*
+   * make an exact copy of given node and return the new node
+   * */
+  private static TNode<Integer> copy (final TNode<Integer> root) {
+    if (root == null) return null;
+    TNode<Integer> tnode = new TNode<>(root.data);
+    tnode.left = copy(root.left);
+    tnode.right = copy(root.right);
+    return tnode;
+  }
+
+  /*
+   * make an exact copy of given tree and return the new tree
+   * */
+  public static TNodeTree<Integer> copy (final TNodeTree<Integer> tree) {
+    Objects.requireNonNull(tree, "Argument must not be null");
+    return new TNodeTree<>(copy(tree.root));
   }
 }
