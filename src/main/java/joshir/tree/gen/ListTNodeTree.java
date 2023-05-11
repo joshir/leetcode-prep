@@ -20,7 +20,7 @@ public class ListTNodeTree {
     60, 601, 6001, -1, 6002, -1, -1, -1, -1
   );
 
-  private static final class TNode<T extends Number> {
+  private static final class TNode<T extends Comparable<? super T>> {
 
     /* package public by default */
     final T data;
@@ -38,7 +38,7 @@ public class ListTNodeTree {
     }
   }
 
-  private static final class TNodeTree<T extends Number> {
+  private static final class TNodeTree<T extends Comparable<? super T>> {
     /* package public by default */
     final TNode<T> root;
 

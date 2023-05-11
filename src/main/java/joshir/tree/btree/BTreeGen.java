@@ -19,8 +19,7 @@ public class BTreeGen {
    *
    *      *- non-leaf vertices
    * */
-  private static final List<Integer> tree = List.of(
-10,
+  private static final List<Integer> tree = List.of(10,
     30,
     300,
     3001, -1,
@@ -33,7 +32,7 @@ public class BTreeGen {
     4002, -1, -1, -1,
     -1
   );
-  private static class TNode<T extends Number> {
+  private static class TNode<T extends Comparable<? super T>> {
     /* package public by default*/
     T data;
 
@@ -56,7 +55,7 @@ public class BTreeGen {
       }
   }
 
-  private static class  TNodeTree<T extends Number>{
+  private static class  TNodeTree<T extends Comparable<? super T>>{
     final TNode<T> root;
     TNodeTree (TNode<T> root) {
       this.root = root;
