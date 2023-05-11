@@ -1,7 +1,6 @@
 package joshir.tree.gen;
 
 import java.util.*;
-import java.util.stream.IntStream;
 
 /*
 * generate tree from a list of numbers
@@ -18,7 +17,7 @@ public class ListTNodeTree {
     30, 300, -1, 301, -1, -1,
     40, 400, -1, 401, -1, -1,
     50, 501, -1, 502, -1, 503, -1, 504, -1, -1,
-    60, 601, 6001, -1, 6002, -1, -1, -1
+    60, 601, 6001, -1, 6002, -1, -1, -1, -1
   );
 
   private static final class TNode<T extends Number> {
@@ -60,7 +59,7 @@ public class ListTNodeTree {
     displayTreeBreadth(root);
     System.out.println(search(root,601));
     System.out.println(search(root,301));
-    List<TNode<Integer>> path = searchPath(root,301);
+    searchPath(root,301);
   }
 
   /*
@@ -217,9 +216,9 @@ public class ListTNodeTree {
     Objects.requireNonNull(root, "Argument must not be null");
     if(root.data == data) return true;
     boolean res = false;
-    for(var node: root.children){
-      if(res = search(node, data)) break;
-    }
+    for(var node: root.children)
+      if(res = search(node, data))
+        break;
     return res;
   }
 
@@ -256,7 +255,7 @@ public class ListTNodeTree {
     int index;
     for(index = 0; index < Math.min(path1.size(), path2.size()) && path1.get(index).equals(path2.get(index)); index++) ;
 
-    return Optional
-      .ofNullable(index == 0 ? null : path1.get(index));
+    return
+      Optional.ofNullable(index == 0 ? null : path1.get(index));
   }
 }
