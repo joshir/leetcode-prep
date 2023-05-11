@@ -5,11 +5,11 @@ import java.util.List;
 
 public class BTreeGen {
   /*
-   *
-   *              301
-   *        30*           3002
-   *              300*
    *                      3001
+   *              300*
+   *        30*           3002
+   *              301
+   *
    *    10*
    *
    *
@@ -17,9 +17,10 @@ public class BTreeGen {
    *              401*
    *                      4001
    *
-   *      *- non-leaf vertices
+   *      *- non-leaf vertices for in-order tree generation
    * */
-  private static final List<Integer> tree = List.of(10,
+  private static final List<Integer> tree = List.of(
+  10,
     30,
     300,
     3001, -1,
