@@ -20,7 +20,7 @@ public class BTreeGen {
    *      *- non-leaf vertices for in-order tree generation
    * */
   private static final List<Integer> tree = List.of(
-  10,
+   10,
     30,
     300,
     3001, -1,
