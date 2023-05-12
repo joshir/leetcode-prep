@@ -20,6 +20,21 @@ public class ListTNodeTree {
     60, 601, 6001, -1, 6002, -1, -1, -1, -1
   );
 
+  private static final List<Integer> mirror = List.of(
+    1,
+    2, 22, 2223, -1, 2224, -1, -1, -1,
+    3, 33, -1, 34, -1, 35, -1, 36, -1, -1,
+    4, 44, -1, 45, -1, -1,
+    5, 55, -1, 56, -1, -1, -1
+  );
+
+  private static final List<Integer> symmetric = List.of(
+    1,
+    4, 44, -1, 45, -1, -1,
+    3, 33, -1, 34, -1, 35, -1, 36, -1, -1,
+    5, 55, -1, 56, -1, -1, -1
+  );
+
   private static final class TNode<T extends Comparable<? super T>> {
 
     /* package public by default */
@@ -49,17 +64,17 @@ public class ListTNodeTree {
   }
 
   public static void main(String[] args) {
-    TNodeTree<Integer> tree = generate();
-    TNode<Integer> root = tree.root;
+    TNodeTree<Integer> oTree = generate(tree);
+    TNode<Integer> root = oTree.root;
+    TNodeTree<Integer> nTree = copy(oTree);
     System.out.println("size " + size(root));
     System.out.println("max " + maximum(root));
     System.out.println("edge height " + edgeLength(root));
     displayTreeBreadth(root);
-    pruneLeaves(root);
-    displayTreeBreadth(root);
-    System.out.println(search(root,601));
-    System.out.println(search(root,301));
-    searchPath(root,301);
+    displayTreeBreadth(nTree.root);
+    System.out.println(isPerfectlyOverlappable(oTree, nTree));
+    System.out.println(isMirror(oTree, generate(mirror)));
+    System.out.println(isSymmetric(generate(symmetric)));
   }
 
   /*
@@ -107,7 +122,7 @@ public class ListTNodeTree {
   * pop() when marker is encountered in tree. (-1 is used as a marker
   * to indicate returning back from node to parent node)
   * */
-  public static TNodeTree<Integer> generate() {
+  public static TNodeTree<Integer> generate(List<Integer> tree) {
     TNodeTree<Integer> top = null;
     LinkedList<TNode<Integer>> stack = new LinkedList<>();
 
@@ -248,14 +263,102 @@ public class ListTNodeTree {
   }
 
   /*
+  * returns the index of the LCA
+  * */
+  private static int getIndexToLastCommonElement(List<TNode<Integer>> path1, List<TNode<Integer>> path2) {
+    int index;
+    for(index = 0; index < Math.min(path1.size(), path2.size()) && path1.get(index).equals(path2.get(index)); index++) ;
+    return index;
+  }
+
+  /*
   * lowest common ancestor of two nodes in the tree
   * */
   public static Optional<TNode<Integer>> lca(final TNode<Integer> root, int val1, int val2) {
     List<TNode<Integer>> path1 = searchPath(root, val1), path2 = searchPath(root, val2);
-    int index;
-    for(index = 0; index < Math.min(path1.size(), path2.size()) && path1.get(index).equals(path2.get(index)); index++) ;
+    int index = getIndexToLastCommonElement(path1, path2);
 
     return
       Optional.ofNullable(index == 0 ? null : path1.get(index));
+  }
+
+  /*
+  * sub vertices of a list is equals to the num of edges between them
+  * dist(A,B) = dist(A, LCA(A,B)) + dist(B,LCA(A,B))
+  * where dist(x,y) = position(x) - position(y) = #edges in the list
+  * */
+  public static int edgesBetweenNodes(final TNode<Integer> root, int val1, int val2) {
+    List<TNode<Integer>> path1 = searchPath(root, val1), path2 = searchPath(root, val2);
+    int index = getIndexToLastCommonElement(path1, path2);
+    return index != 0 ? path1.size()-index + path2.size()-index: -1;
+  }
+
+  /*
+  * verify that shapes line up exactly using the root
+  * nodes of each subtree
+  * */
+  public static boolean isPerfectlyOverlappable(TNode<Integer> rootA, TNode<Integer> rootB) {
+    if(rootA == null && rootB == null) return true;
+    else if(rootA == null || rootB == null) return false;
+    else if(rootA.children.size() != rootB.children.size()) return false;
+
+    for(int index = 0; index < rootA.children.size(); index++)
+      if (!(isPerfectlyOverlappable(rootA.children.get(index), rootB.children.get(index))))
+        return false;
+    return true;
+  }
+
+  /*
+   * verify that shapes of the trees line up exactly
+   * */
+  public static boolean isPerfectlyOverlappable(TNodeTree<Integer> treeA, TNodeTree<Integer> treeB) {
+    Objects.requireNonNull(treeA, "Argument must not be null");
+    Objects.requireNonNull(treeB, "Argument must not be null");
+    return isPerfectlyOverlappable(treeA.root, treeB.root);
+  }
+
+  /*
+   * check if two trees are mirrors of each other
+   * */
+  public static boolean isMirror(TNodeTree<Integer> treeA, TNodeTree<Integer> treeB) {
+    Objects.requireNonNull(treeA, "Argument must not be null");
+    Objects.requireNonNull(treeB, "Argument must not be null");
+    return isMirror(treeA.root, treeB.root);
+  }
+
+  /*
+  * check if two subtrees are mirrors of each other
+  * */
+  public static boolean isMirror(TNode<Integer> rootA, TNode<Integer> rootB) {
+    if(rootA == null && rootB == null) return true;
+    else if(rootA == null || rootB == null) return false;
+    else if(rootA.children.size() != rootB.children.size()) return false;
+
+    for(int index = 0, last = rootA.children.size() -1; index < rootA.children.size(); index++)
+      if (!(isPerfectlyOverlappable(rootA.children.get(index), rootB.children.get(last-index))))
+        return false;
+    return true;
+  }
+
+  public static boolean isSymmetric(TNode<Integer> root) {
+    if(root == null) return true;
+
+    for(int index = 0, size = root.children.size(); index <= size/2; index++){
+      TNode<Integer>  node = root.children.get(index), nodeMirror = root.children.get(size - 1 - index);
+      if(node == nodeMirror)
+        return true;
+      else if(node.children.size() != nodeMirror.children.size())
+        return false;
+    }
+
+    for(int index = 0, size = root.children.size(); index <= size/2; index++) {
+      if(!isSymmetric(root.children.get(index))) return false;
+    }
+    return true;
+  }
+
+  public static boolean isSymmetric(TNodeTree<Integer> tree) {
+    Objects.requireNonNull(tree, "Argument must not be null");
+    return isSymmetric(tree);
   }
 }
