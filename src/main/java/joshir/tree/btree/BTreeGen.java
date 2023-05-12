@@ -16,9 +16,9 @@ public class BTreeGen {
    *    10*
    *
    *
-   *        40*           4002
+   *        40*           4001
    *              401*
-   *                      4001
+   *                      4002
    *
    *      *- non-leaf vertices for in-order tree generation
    * */
@@ -73,6 +73,8 @@ public class BTreeGen {
     TNodeTree<Integer> tree = generate();
     TNode<Integer> root = tree.root;
     TNodeTree<Integer> nTree= copy(tree);
+
+    displayTreeBreadthUsingQueue(nTree.root);
   }
 
   /*
@@ -122,5 +124,32 @@ public class BTreeGen {
   public static TNodeTree<Integer> copy (final TNodeTree<Integer> tree) {
     Objects.requireNonNull(tree, "Argument must not be null");
     return new TNodeTree<>(copy(tree.root));
+  }
+
+
+  /*
+   * depth traversal: find leaf and return
+   * */
+  private static void displayInDepth(final TNode<Integer> root) {
+    if(root == null) return;
+    System.out.println(root.data);
+    displayInDepth(root.left);
+    displayInDepth(root.right);
+  }
+
+  /*
+   * breadth-first traversal: find siblings and repeat
+   * */
+  private static void displayTreeBreadthUsingQueue(final TNode<Integer> root) {
+    Objects.requireNonNull(tree, "Argument must not be null");
+    LinkedList<TNode<Integer>> queue = new LinkedList<>();
+
+    queue.add(root);
+    while(queue.size()>0) {
+      TNode<Integer> node = queue.removeFirst();
+      System.out.println(node.data);
+      if (node.left != null) queue.add(node.left);
+      if (node.right != null) queue.add(node.right);
+    }
   }
 }
