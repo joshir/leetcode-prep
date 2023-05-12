@@ -1,7 +1,5 @@
 package joshir.tree.btree;
 
-import joshir.tree.gen.ListTNodeTree;
-
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -75,6 +73,9 @@ public class BTreeGen {
     TNodeTree<Integer> nTree= copy(tree);
 
     displayTreeBreadthUsingQueue(nTree.root);
+    pruneLeaves(nTree.root);
+    displayInDepth(nTree.root);
+
   }
 
   /*
@@ -126,7 +127,6 @@ public class BTreeGen {
     return new TNodeTree<>(copy(tree.root));
   }
 
-
   /*
    * depth traversal: find leaf and return
    * */
@@ -151,5 +151,17 @@ public class BTreeGen {
       if (node.left != null) queue.add(node.left);
       if (node.right != null) queue.add(node.right);
     }
+  }
+
+  /*
+   * prune leaves - takes in the tree and mutates it
+   * */
+  public static TNode<Integer>  pruneLeaves(TNode<Integer> root){
+    if(root == null) return null;
+    if(root.left == null && root.right == null) return null;
+
+    root.left = pruneLeaves(root.left);
+    root.right = pruneLeaves(root.right);
+    return root;
   }
 }
