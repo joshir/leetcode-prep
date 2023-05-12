@@ -285,7 +285,7 @@ public class ListTNodeTree {
   /*
   * sub vertices of a list is equals to the num of edges between them
   * dist(A,B) = dist(A, LCA(A,B)) + dist(B,LCA(A,B))
-  * where dist(x,y) = position(x) - position(y) = #edges in the list
+  * where dist(x,y) = position(y) - position(x) = #no of edges between x and y
   * */
   public static int edgesBetweenNodes(final TNode<Integer> root, int val1, int val2) {
     List<TNode<Integer>> path1 = searchPath(root, val1), path2 = searchPath(root, val2);
@@ -295,7 +295,8 @@ public class ListTNodeTree {
 
   /*
   * verify that shapes line up exactly using the root
-  * nodes of each subtree
+  * nodes of each subtree by testing the size of the left nodes
+  * of each of children of the tree A and B
   * */
   public static boolean isPerfectlyOverlappable(TNode<Integer> rootA, TNode<Integer> rootB) {
     if(rootA == null && rootB == null) return true;
@@ -327,7 +328,9 @@ public class ListTNodeTree {
   }
 
   /*
-  * check if two subtrees are mirrors of each other
+  * check if two subtrees are mirrors of each other by
+  * testing the size at left and right extremities of treeA and treeB
+  * respectively
   * */
   public static boolean isMirror(TNode<Integer> rootA, TNode<Integer> rootB) {
     if(rootA == null && rootB == null) return true;
@@ -340,6 +343,12 @@ public class ListTNodeTree {
     return true;
   }
 
+  /*
+  * check if a subtree is symmetric
+  * by checking the extremities outside in for children in this root
+  * each check comprises testing if this child $node has the same # of children as
+  * its mirror child $nodeMirror
+  * */
   public static boolean isSymmetric(TNode<Integer> root) {
     if(root == null) return true;
 
@@ -357,6 +366,9 @@ public class ListTNodeTree {
     return true;
   }
 
+  /*
+  * check if a subtree is symmetric
+  * */
   public static boolean isSymmetric(TNodeTree<Integer> tree) {
     Objects.requireNonNull(tree, "Argument must not be null");
     return isSymmetric(tree);
