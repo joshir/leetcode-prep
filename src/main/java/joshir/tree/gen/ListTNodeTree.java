@@ -58,18 +58,27 @@ public class ListTNodeTree {
     int min = Integer.MIN_VALUE;
     int size = 0;
     int height = 0;
+    final List<TNodeExt<T>> children = new ArrayList<>();
 
     TNodeExt(T data) {
       super(data);
     }
   }
 
-  private static final class TNodeTree<T extends Comparable<? super T>> {
+  private static class TNodeTree<T extends Comparable<? super T>> {
     /* package public by default */
     final TNode<T> root;
-
     /* package public by default */
     TNodeTree(TNode<T> root) {
+      this.root = root;
+    }
+  }
+
+  private static final class TNodeExtTree<T extends Comparable<? super T>> extends TNodeTree<T> {
+    /* package public by default */
+    final TNodeExt<T> root;
+    TNodeExtTree(TNodeExt<T> root) {
+      super(root);
       this.root = root;
     }
   }
