@@ -120,15 +120,15 @@ public class ListTNodeTree {
   public static TNodeTree<TNode<Integer>, Integer> generate(final List<Integer> tree) {
     TNodeTree<TNode<Integer>, Integer> top = null;
     LinkedList<TNode<Integer>> stack = new LinkedList<>();
+    TNode<Integer> node;
 
     for(int data : tree){
       if(data != -1){
-        TNode<Integer> node = new TNode<>(data);
-        TNode<Integer> parent = stack.peekLast();
-        if(parent == null)
+        node = new TNode<>(data);
+        if(stack.peekLast() == null)
           top = new TNodeTree<>(node);
         else
-          parent.children.add(node);
+          stack.peekLast().children.add(node);
         stack.add(node);
       }
       else
