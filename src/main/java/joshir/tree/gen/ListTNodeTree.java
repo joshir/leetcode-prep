@@ -10,6 +10,13 @@ import static joshir.tree.Common.*;
 public class ListTNodeTree {
 
   /*
+   * TODO
+   *  move node classes inside tree classes once everything else is done
+   *  this will simplify type decls that look like this NodeTree<TNode<Integer>,Integer> to
+   *  NodeTree<T>
+   * */
+
+  /*
    * Reusable Tree class where E represents node TNode or any extension of the TNode class
    * K represents a manifestation of Comparable which either implements this interface
    * or doesn't, in which case it's super class must. This narrows down K to a particular type
@@ -52,6 +59,7 @@ public class ListTNodeTree {
     int size = 0;
 
     int height = 0;
+
     final List<TNodeExt<T>> children = new ArrayList<>();
 
     TNodeExt(T data) {

@@ -7,6 +7,19 @@ import static joshir.tree.Common.bTree;
 
 public class BTreeGen {
 
+  /*
+  * TODO
+  *  move node classes inside tree classes once everything else is done
+  *  this will simplify type decls that look like this NodeTree<TNode<Integer>,Integer> to
+  *  NodeTree<T>
+  * */
+  private static class TNodeTree<E extends TNode<T> , T extends Comparable<? super T>>{
+    final E root;
+    TNodeTree (E root) {
+      this.root = root;
+    }
+  }
+
   private static class TNode<T extends Comparable<? super T>> {
     /* package public by default*/
     T data;
@@ -30,17 +43,10 @@ public class BTreeGen {
       }
   }
 
-  private static class  TNodeTree<T extends Comparable<? super T>>{
-    final TNode<T> root;
-    TNodeTree (TNode<T> root) {
-      this.root = root;
-    }
-  }
-
   public static void main(String[] args) {
-    TNodeTree<Integer> tree = generate();
+    TNodeTree<TNode<Integer>,Integer> tree = generate();
     TNode<Integer> root = tree.root;
-    TNodeTree<Integer> nTree= copy(tree);
+    TNodeTree<TNode<Integer>,Integer> nTree= copy(tree);
 
     displayTreeBreadthUsingQueue(nTree.root);
     pruneLeaves(nTree.root);
@@ -52,8 +58,8 @@ public class BTreeGen {
   * in-order tree generation from in-order
   * list of tree nodes
   * */
-  public static TNodeTree<Integer> generate() {
-    TNodeTree<Integer> top = null;
+  public static TNodeTree<TNode<Integer>,Integer> generate() {
+    TNodeTree<TNode<Integer>,Integer> top = null;
     LinkedList<TNode<Integer>> stack = new LinkedList<>();
     TNode<Integer> parent, node;
     for(int data : bTree){
@@ -92,7 +98,7 @@ public class BTreeGen {
   /*
    * make an exact copy of given tree and return the new tree
    * */
-  public static TNodeTree<Integer> copy (final TNodeTree<Integer> tree) {
+  public static TNodeTree<TNode<Integer>, Integer> copy (final TNodeTree<TNode<Integer>, Integer> tree) {
     Objects.requireNonNull(tree, "Argument must not be null");
     return new TNodeTree<>(copy(tree.root));
   }
