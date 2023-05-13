@@ -36,7 +36,6 @@ public class ListTNodeTree {
   );
 
   private static class TNode<T extends Comparable<? super T>> {
-
     /* package public by default */
     final T data;
 
@@ -54,9 +53,13 @@ public class ListTNodeTree {
   }
 
   private static final class TNodeExt<T extends Comparable<? super T>> extends TNode<T> {
+
     int max = Integer.MAX_VALUE;
+
     int min = Integer.MIN_VALUE;
+
     int size = 0;
+
     int height = 0;
     final List<TNodeExt<T>> children = new ArrayList<>();
 
@@ -65,28 +68,25 @@ public class ListTNodeTree {
     }
   }
 
-  private static class TNodeTree<T extends Comparable<? super T>> {
+  /*
+  * Reusable Tree class where E represents node TNode or any extension of the TNode class
+  * K represents a manifestation of Comparable which either implements this interface
+  * or doesn't, in which case it's super class must. This narrows down K to a particular type
+  * but also relaxes the restriction
+  * */
+  private static class TNodeTree<E extends TNode<K>, K extends Comparable<? super K>> {
     /* package public by default */
-    final TNode<T> root;
+    final E root;
     /* package public by default */
-    TNodeTree(TNode<T> root) {
-      this.root = root;
-    }
-  }
-
-  private static final class TNodeExtTree<T extends Comparable<? super T>> extends TNodeTree<T> {
-    /* package public by default */
-    final TNodeExt<T> root;
-    TNodeExtTree(TNodeExt<T> root) {
-      super(root);
+    TNodeTree(E root) {
       this.root = root;
     }
   }
 
   public static void main(String[] args) {
-    TNodeTree<Integer> oTree = generate(tree);
+    TNodeTree<TNode<Integer>, Integer> oTree = generate(tree);
     TNode<Integer> root = oTree.root;
-    TNodeTree<Integer> nTree = copy(oTree);
+    TNodeTree<TNode<Integer>, Integer> nTree = copy(oTree);
     System.out.println("size " + size(root));
     System.out.println("max " + maximum(root));
     System.out.println("edge height " + edgeLength(root));
@@ -142,8 +142,8 @@ public class ListTNodeTree {
   * pop() when marker is encountered in tree. (-1 is used as a marker
   * to indicate returning back from node to parent node)
   * */
-  public static TNodeTree<Integer> generate(List<Integer> tree) {
-    TNodeTree<Integer> top = null;
+  public static TNodeTree<TNode<Integer>, Integer> generate(List<Integer> tree) {
+    TNodeTree<TNode<Integer>, Integer> top = null;
     LinkedList<TNode<Integer>> stack = new LinkedList<>();
 
     for(int data : tree){
@@ -230,7 +230,7 @@ public class ListTNodeTree {
   /*
   * make an exact copy of given tree and return the new tree
   * */
-  public static TNodeTree<Integer> copy (final TNodeTree<Integer> tree) {
+  public static TNodeTree<TNode<Integer>, Integer> copy (final TNodeTree<TNode<Integer>, Integer>tree) {
     Objects.requireNonNull(tree, "Argument must not be null");
     return new TNodeTree<>(copy(tree.root));
   }
@@ -332,7 +332,8 @@ public class ListTNodeTree {
   /*
    * verify that shapes of the trees line up exactly
    * */
-  public static boolean isPerfectlyOverlappable(TNodeTree<Integer> treeA, TNodeTree<Integer> treeB) {
+  public static boolean isPerfectlyOverlappable(final TNodeTree<TNode<Integer>, Integer> treeA,
+                                                final TNodeTree<TNode<Integer>, Integer> treeB) {
     Objects.requireNonNull(treeA, "Argument must not be null");
     Objects.requireNonNull(treeB, "Argument must not be null");
     return isPerfectlyOverlappable(treeA.root, treeB.root);
@@ -341,7 +342,8 @@ public class ListTNodeTree {
   /*
    * check if two trees are mirrors of each other
    * */
-  public static boolean isMirror(TNodeTree<Integer> treeA, TNodeTree<Integer> treeB) {
+  public static boolean isMirror(final TNodeTree<TNode<Integer>, Integer> treeA,
+                                 final TNodeTree<TNode<Integer>, Integer> treeB) {
     Objects.requireNonNull(treeA, "Argument must not be null");
     Objects.requireNonNull(treeB, "Argument must not be null");
     return isMirror(treeA.root, treeB.root);
@@ -391,7 +393,7 @@ public class ListTNodeTree {
   /*
   * check if a subtree is symmetric
   * */
-  public static boolean isSymmetric(TNodeTree<Integer> tree) {
+  public static boolean isSymmetric(final TNodeTree<TNode<Integer>, Integer> tree) {
     Objects.requireNonNull(tree, "Argument must not be null");
     return isSymmetric(tree);
   }
