@@ -19,7 +19,7 @@ public class ListTNodeTree {
    * or doesn't, in which case it's super class must. This narrows down K to a particular type
    * but also relaxes the restriction
    * */
-  private static class TNodeTree<E extends TNode<K>, K extends Comparable<? super K>> {
+  static class TNodeTree<E extends TNode<K>, K extends Comparable<? super K>> {
 
     /* package public by default */
     final E root;
@@ -30,7 +30,7 @@ public class ListTNodeTree {
     }
   }
 
-  private static class TNode<T extends Comparable<? super T>> {
+  static class TNode<T extends Comparable<? super T>> {
 
     /* package public by default */
     final T data;
