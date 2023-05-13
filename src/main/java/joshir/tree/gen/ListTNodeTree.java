@@ -4,9 +4,6 @@ import java.util.*;
 
 import static joshir.tree.Common.*;
 
-/*
-* generate tree from a list of numbers
-* */
 public class ListTNodeTree {
 
   /*
@@ -34,8 +31,19 @@ public class ListTNodeTree {
   }
 
   private static class TNode<T extends Comparable<? super T>> {
+
     /* package public by default */
     final T data;
+
+    /* val determined at runtime post object-creation cannot be final*/
+    T max;
+
+    /* val determined at runtime post object-creation cannot be final*/
+    T min;
+
+    int size = 0;
+
+    int height = 0;
 
     /* package public by default */
     final List<TNode<T>> children = new ArrayList<>();
@@ -47,23 +55,6 @@ public class ListTNodeTree {
     @Override
     public String toString(){
       return data.toString();
-    }
-  }
-
-  private static final class TNodeExt<T extends Comparable<? super T>> extends TNode<T> {
-
-    int max = Integer.MAX_VALUE;
-
-    int min = Integer.MIN_VALUE;
-
-    int size = 0;
-
-    int height = 0;
-
-    final List<TNodeExt<T>> children = new ArrayList<>();
-
-    TNodeExt(T data) {
-      super(data);
     }
   }
 
@@ -94,7 +85,7 @@ public class ListTNodeTree {
   /*
   * breadth-first traversal: find siblings and repeat
   * */
-  private static void displayTreeBreadth(TNode<Integer> root) {
+  private static void displayTreeBreadth(final TNode<Integer> root) {
     if(root == null) return;
 
     if(!root.children.isEmpty()){
@@ -126,7 +117,7 @@ public class ListTNodeTree {
   * pop() when marker is encountered in tree. (-1 is used as a marker
   * to indicate returning back from node to parent node)
   * */
-  public static TNodeTree<TNode<Integer>, Integer> generate(List<Integer> tree) {
+  public static TNodeTree<TNode<Integer>, Integer> generate(final List<Integer> tree) {
     TNodeTree<TNode<Integer>, Integer> top = null;
     LinkedList<TNode<Integer>> stack = new LinkedList<>();
 
@@ -269,7 +260,7 @@ public class ListTNodeTree {
   /*
   * returns the index of the LCA
   * */
-  private static int getIndexToLastCommonElement(List<TNode<Integer>> path1, List<TNode<Integer>> path2) {
+  private static int getIndexToLastCommonElement(final List<TNode<Integer>> path1, final List<TNode<Integer>> path2) {
     int index;
     for(index = 0; index < Math.min(path1.size(), path2.size()) && path1.get(index).equals(path2.get(index)); index++) ;
     return index;
@@ -338,7 +329,7 @@ public class ListTNodeTree {
   * testing the size at left and right extremities of treeA and treeB
   * respectively
   * */
-  public static boolean isMirror(TNode<Integer> rootA, TNode<Integer> rootB) {
+  public static boolean isMirror(final TNode<Integer> rootA, final TNode<Integer> rootB) {
     if(rootA == null && rootB == null) return true;
     else if(rootA == null || rootB == null) return false;
     else if(rootA.children.size() != rootB.children.size()) return false;
@@ -355,7 +346,7 @@ public class ListTNodeTree {
   * each check comprises testing if this child $node has the same # of children as
   * its mirror child $nodeMirror
   * */
-  public static boolean isSymmetric(TNode<Integer> root) {
+  public static boolean isSymmetric(final TNode<Integer> root) {
     if(root == null) return true;
 
     TNode<Integer> node, nodeMirror;
@@ -379,6 +370,22 @@ public class ListTNodeTree {
   * */
   public static boolean isSymmetric(final TNodeTree<TNode<Integer>, Integer> tree) {
     Objects.requireNonNull(tree, "Argument must not be null");
-    return isSymmetric(tree);
+    return isSymmetric(tree.root);
+  }
+
+
+  /*
+  * fill in extension fields at each level of the tree
+  * w/ data relevant to that level
+  * */
+  private static void generateExtensionFields(final TNode<Integer> root, int depth) {
+    if(root == null) return;
+    for (TNode<Integer> node : root.children){
+      root.min = root.min == null ? node.data : Math.min(root.min, node.data);
+      root.max = root.max == null ? node.data : Math.max(root.max, node.data);
+      root.height = Math.max(root.height, depth);
+      root.size++;
+      generateExtensionFields(node, depth+1);
+    }
   }
 }
