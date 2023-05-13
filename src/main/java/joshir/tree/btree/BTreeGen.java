@@ -1,42 +1,12 @@
 package joshir.tree.btree;
 
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Objects;
 
+import static joshir.tree.Common.bTree;
+
 public class BTreeGen {
-  /*
-   *                      3001
-   *              300*
-   *        30*           3002
-   *              301
-   *
-   *    10*
-   *
-   *
-   *        40*           4001
-   *              401*
-   *                      4002
-   *
-   *      *- non-leaf vertices for in-order tree generation
-   * */
-  private static final List<Integer> tree = List.of(
-    10,
-    30,
-    300,
-    3001, -1,
-    3002, -1, -1,
-    301, -1, -1,
-    40,
-    400, -1,
-    401,
-    4001, -1,
-    4002, -1, -1, -1,
-    -1
-  );
-  private static final List<Integer> tree1 = List.of(
-          10,-1
-  );
+
   private static class TNode<T extends Comparable<? super T>> {
     /* package public by default*/
     T data;
@@ -86,7 +56,7 @@ public class BTreeGen {
     TNodeTree<Integer> top = null;
     LinkedList<TNode<Integer>> stack = new LinkedList<>();
     TNode<Integer> parent, node;
-    for(int data : tree){
+    for(int data : bTree){
       parent = stack.peekLast();
       if(data != -1) {
         node = new TNode<>(data);
@@ -141,7 +111,7 @@ public class BTreeGen {
    * breadth-first traversal: find siblings and repeat
    * */
   private static void displayTreeBreadthUsingQueue(final TNode<Integer> root) {
-    Objects.requireNonNull(tree, "Argument must not be null");
+    Objects.requireNonNull(bTree, "Argument must not be null");
     LinkedList<TNode<Integer>> queue = new LinkedList<>();
 
     queue.add(root);

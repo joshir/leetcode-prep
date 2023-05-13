@@ -2,38 +2,29 @@ package joshir.tree.gen;
 
 import java.util.*;
 
+import static joshir.tree.Common.*;
+
 /*
 * generate tree from a list of numbers
 * */
 public class ListTNodeTree {
 
   /*
-   * tree as a list with marker -1 to indicate
-   * returning down the stack frame. other numbers mean
-   * traverse up the stack until -1 is encountered
+   * Reusable Tree class where E represents node TNode or any extension of the TNode class
+   * K represents a manifestation of Comparable which either implements this interface
+   * or doesn't, in which case it's super class must. This narrows down K to a particular type
+   * but also relaxes the restriction
    * */
-  private static final List<Integer> tree = List.of(
-    10,
-    30, 300, -1, 301, -1, -1,
-    40, 400, -1, 401, -1, -1,
-    50, 501, -1, 502, -1, 503, -1, 504, -1, -1,
-    60, 601, 6001, -1, 6002, -1, -1, -1, -1
-  );
+  private static class TNodeTree<E extends TNode<K>, K extends Comparable<? super K>> {
 
-  private static final List<Integer> mirror = List.of(
-    1,
-    2, 22, 2223, -1, 2224, -1, -1, -1,
-    3, 33, -1, 34, -1, 35, -1, 36, -1, -1,
-    4, 44, -1, 45, -1, -1,
-    5, 55, -1, 56, -1, -1, -1
-  );
+    /* package public by default */
+    final E root;
 
-  private static final List<Integer> symmetric = List.of(
-    1,
-    4, 44, -1, 45, -1, -1,
-    3, 33, -1, 34, -1, 35, -1, 36, -1, -1,
-    5, 55, -1, 56, -1, -1, -1
-  );
+    /* package public by default */
+    TNodeTree(E root) {
+      this.root = root;
+    }
+  }
 
   private static class TNode<T extends Comparable<? super T>> {
     /* package public by default */
@@ -65,21 +56,6 @@ public class ListTNodeTree {
 
     TNodeExt(T data) {
       super(data);
-    }
-  }
-
-  /*
-  * Reusable Tree class where E represents node TNode or any extension of the TNode class
-  * K represents a manifestation of Comparable which either implements this interface
-  * or doesn't, in which case it's super class must. This narrows down K to a particular type
-  * but also relaxes the restriction
-  * */
-  private static class TNodeTree<E extends TNode<K>, K extends Comparable<? super K>> {
-    /* package public by default */
-    final E root;
-    /* package public by default */
-    TNodeTree(E root) {
-      this.root = root;
     }
   }
 
