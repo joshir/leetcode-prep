@@ -1,4 +1,4 @@
-# interview
+# interview stuff
 
-mostly me studying, and experimenting w/ data structures, algorithms and problems for interviews etc.
+Studying and experimenting w/ data structures, algorithms and problems for interviews etc.
 
