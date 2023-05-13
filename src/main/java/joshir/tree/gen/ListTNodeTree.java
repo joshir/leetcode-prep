@@ -352,8 +352,10 @@ public class ListTNodeTree {
   public static boolean isSymmetric(TNode<Integer> root) {
     if(root == null) return true;
 
+    TNode<Integer> node, nodeMirror;
     for(int index = 0, size = root.children.size(); index <= size/2; index++){
-      TNode<Integer>  node = root.children.get(index), nodeMirror = root.children.get(size - 1 - index);
+      node = root.children.get(index);
+      nodeMirror = root.children.get(size - 1 - index);
       if(node == nodeMirror)
         return true;
       else if(node.children.size() != nodeMirror.children.size())
