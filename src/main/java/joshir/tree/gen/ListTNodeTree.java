@@ -35,7 +35,7 @@ public class ListTNodeTree {
     5, 55, -1, 56, -1, -1, -1
   );
 
-  private static final class TNode<T extends Comparable<? super T>> {
+  private static class TNode<T extends Comparable<? super T>> {
 
     /* package public by default */
     final T data;
@@ -50,6 +50,17 @@ public class ListTNodeTree {
     @Override
     public String toString(){
       return data.toString();
+    }
+  }
+
+  private static final class TNodeExt<T extends Comparable<? super T>> extends TNode<T> {
+    int max = Integer.MAX_VALUE;
+    int min = Integer.MIN_VALUE;
+    int size = 0;
+    int height = 0;
+
+    TNodeExt(T data) {
+      super(data);
     }
   }
 
