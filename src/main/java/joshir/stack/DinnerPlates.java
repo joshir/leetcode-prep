@@ -50,6 +50,7 @@ public class DinnerPlates {
       else stack = listOfStacks.get(index + 1);
       index++;
     }
+    if (listOfStacks.getLast().isEmpty()) listOfStacks.removeLast();
     return retVal;
   }
 }
