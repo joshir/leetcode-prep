@@ -1,5 +1,6 @@
 package joshir.tree.heap;
 
+import java.util.Comparator;
 import java.util.Objects;
 
 public class SimpleHeap<T extends Comparable<? super T>> {
@@ -10,26 +11,34 @@ public class SimpleHeap<T extends Comparable<? super T>> {
   /* track the next open position */
   private int next = 0;
 
+  /*
+   * if the default comparable behaviour is unacceptable,
+   * override the comparator in the cons
+   * */
+  private Comparator<? super T> comparator = (o1, o2) -> o1.compareTo(o2);
+
   @SuppressWarnings("unchecked")
   public SimpleHeap(int len) {
     arr = (T[]) new Comparable<?>[len];
   }
 
+  public SimpleHeap(int len, Comparator<? super T> comparator ) {
+    this(len);
+    this.comparator = comparator;
+  }
+
   public int left(int index) {
     if (index < 0 || index > arr.length/2) throw new IndexOutOfBoundsException();
-
     return 2 * index - 1;
   }
 
   public int right(int index) {
     if (index < 0 || index > arr.length/2) throw new IndexOutOfBoundsException();
-
     return 2 * index + 1;
   }
 
   public int parent(int index) {
     if (index < 0 || index > arr.length-1) throw new IndexOutOfBoundsException();
-
     return index / 2;
   }
 
