@@ -1,16 +1,16 @@
-package joshir.stacks;
+package joshir.stack;
 
 import java.util.Arrays;
 import java.util.LinkedList;
 
-public class NextSmallerLeftTwo {
-  private static int[] fillSmallerLeft(int [] arr) {
+public class NextSmallerRightTwo {
+  private static int[] fillSmallerRight(int [] arr) {
     int[] nsr = new int[arr.length];
     LinkedList<Integer> stack = new LinkedList<>();
 
-    int index = arr.length;
-    stack.add(arr.length - 1);
-    while (--index >= 0 ) {
+    int index = 0;
+    stack.add(0);
+    while (++index < arr.length) {
       while(stack.size() > 0 && arr[index] < arr[stack.peekLast()])
         nsr[stack.removeLast()] = arr[index];
       stack.add(index);
@@ -24,6 +24,6 @@ public class NextSmallerLeftTwo {
   public static void main(String[] args) {
     int[] arr = {5,7,8,6,4,3,2,9,10,1};
     System.out.println(Arrays.toString(arr));
-    System.out.println(Arrays.toString( fillSmallerLeft(arr)));
+    System.out.println(Arrays.toString( fillSmallerRight(arr)));
   }
 }

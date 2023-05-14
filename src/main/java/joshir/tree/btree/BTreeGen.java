@@ -8,12 +8,14 @@ import static joshir.tree.Common.bTree;
 public class BTreeGen {
 
   /*
-  * TODO
-  *  move node classes inside tree classes once everything else is done
-  *  this will simplify type decls that look like this NodeTree<TNode<Integer>,Integer> to
-  *  NodeTree<T>
-  * */
+   * Reusable Tree class where E represents node TNode or any extension of the TNode class
+   * K represents a manifestation of Comparable which either implements this interface
+   * or doesn't, in which case it's super class must. This narrows down K to a particular type
+   * but also relaxes the restriction
+   * */
   private static class TNodeTree<E extends TNode<T> , T extends Comparable<? super T>>{
+
+    /* package public by default */
     final E root;
     TNodeTree (E root) {
       this.root = root;
@@ -21,13 +23,14 @@ public class BTreeGen {
   }
 
   private static class TNode<T extends Comparable<? super T>> {
-    /* package public by default*/
+
+    /* package public by default */
     T data;
 
-    /* package public by default*/
+    /* package public by default */
     TNode<T> left;
 
-    /* package public by default*/
+    /* package public by default */
     TNode<T> right;
 
     TNode() {
@@ -51,7 +54,6 @@ public class BTreeGen {
     displayTreeBreadthUsingQueue(nTree.root);
     pruneLeaves(nTree.root);
     displayInDepth(nTree.root);
-
   }
 
   /*
@@ -71,6 +73,7 @@ public class BTreeGen {
           parent = node;
           top = new TNodeTree<>(parent);
         }else {
+          /* in order */
           if(parent.left == null)
             parent.left = node;
           else
@@ -85,7 +88,7 @@ public class BTreeGen {
   }
 
   /*
-   * make an exact copy of given node and return the new node
+   * make a copy of given node and return the new node
    * */
   private static TNode<Integer> copy (final TNode<Integer> root) {
     if (root == null) return null;
@@ -96,7 +99,7 @@ public class BTreeGen {
   }
 
   /*
-   * make an exact copy of given tree and return the new tree
+   * make q copy of given tree and return the new tree
    * */
   public static TNodeTree<TNode<Integer>, Integer> copy (final TNodeTree<TNode<Integer>, Integer> tree) {
     Objects.requireNonNull(tree, "Argument must not be null");
@@ -104,7 +107,7 @@ public class BTreeGen {
   }
 
   /*
-   * depth traversal: find leaf and return
+   * depth traversal
    * */
   private static void displayInDepth(final TNode<Integer> root) {
     if(root == null) return;
@@ -114,7 +117,7 @@ public class BTreeGen {
   }
 
   /*
-   * breadth-first traversal: find siblings and repeat
+   * breadth-first traversal
    * */
   private static void displayTreeBreadthUsingQueue(final TNode<Integer> root) {
     Objects.requireNonNull(bTree, "Argument must not be null");
@@ -130,7 +133,7 @@ public class BTreeGen {
   }
 
   /*
-   * prune leaves - takes in the tree and mutates it
+   * mutation - use copy to create a different tree
    * */
   public static TNode<Integer>  pruneLeaves(TNode<Integer> root){
     if(root == null) return null;

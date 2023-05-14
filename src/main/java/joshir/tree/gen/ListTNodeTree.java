@@ -7,13 +7,6 @@ import static joshir.tree.Common.*;
 public class ListTNodeTree {
 
   /*
-   * TODO
-   *  move node classes inside tree classes once everything else is done
-   *  this will simplify type decls that look like this NodeTree<TNode<Integer>,Integer> to
-   *  NodeTree<T>
-   * */
-
-  /*
    * Reusable Tree class where E represents node TNode or any extension of the TNode class
    * K represents a manifestation of Comparable which either implements this interface
    * or doesn't, in which case it's super class must. This narrows down K to a particular type
@@ -73,7 +66,7 @@ public class ListTNodeTree {
   }
 
   /*
-  * depth traversal: find leaf and return
+  * depth traversal
   * */
   private static void displayInDepth(final TNode<Integer> root) {
     if(root == null) return;
@@ -83,7 +76,7 @@ public class ListTNodeTree {
   }
 
   /*
-  * breadth-first traversal: find siblings and repeat
+  * breadth-first traversal
   * */
   private static void displayTreeBreadth(final TNode<Integer> root) {
     if(root == null) return;
@@ -97,7 +90,7 @@ public class ListTNodeTree {
   }
 
   /*
-   * breadth-first traversal: find siblings and repeat
+   * breadth-first traversal
    * */
   private static void displayTreeBreadthUsingQueue(final TNode<Integer> root) {
     LinkedList<TNode<Integer>> queue = new LinkedList<>();
@@ -193,7 +186,7 @@ public class ListTNodeTree {
   }
 
   /*
-   * make an exact copy of given node and return the new node
+   * make a copy of given node and return the new node
    * */
   private static TNode<Integer> copy (final TNode<Integer> root) {
     Objects.requireNonNull(root, "Argument must not be null");
@@ -203,7 +196,7 @@ public class ListTNodeTree {
   }
 
   /*
-  * make an exact copy of given tree and return the new tree
+  * make a copy of given tree and return the new tree
   * */
   public static TNodeTree<TNode<Integer>, Integer> copy (final TNodeTree<TNode<Integer>, Integer>tree) {
     Objects.requireNonNull(tree, "Argument must not be null");

@@ -28,6 +28,11 @@ public class SnapshotArray {
 
     @SuppressWarnings("unchecked")
     public Snappy (int len) {
+      /*
+      *  Arrays are reified in Java and arrays of generic classes
+      *  will need to be type-cast in situ to their intended type when creating
+      *  the object to make the compiler happy. It's an "unsafe" cast.
+      * */
       snapMap = (Map<Integer, Integer>[]) new HashMap<?, ?>[len];
       for (int index = 0; index < len; index++){
         snapMap[index] = new HashMap<>();

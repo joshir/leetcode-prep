@@ -1,4 +1,4 @@
-package joshir.stacks;
+package joshir.stack;
 
 import java.util.Arrays;
 import java.util.LinkedList;
