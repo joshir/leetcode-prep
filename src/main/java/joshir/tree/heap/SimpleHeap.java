@@ -11,15 +11,22 @@ public class SimpleHeap<T extends Comparable<? super T>> {
   /* track the next open position */
   private int next = 0;
 
+  /* default size for backing store */
+  private static final int defaultSize = 20;
+
   /*
    * if the default comparable behaviour is unacceptable,
    * override the comparator in the cons
    * */
   private Comparator<? super T> comparator = (o1, o2) -> o1.compareTo(o2);
 
+  public SimpleHeap() {
+    this(defaultSize);
+  }
+
   @SuppressWarnings("unchecked")
   public SimpleHeap(int len) {
-    arr = (T[]) new Comparable<?>[len];
+    arr = (T[]) new Comparable<?>[defaultSize];
   }
 
   public SimpleHeap(int len, Comparator<? super T> comparator ) {
