@@ -42,6 +42,7 @@ public class DinnerPlates {
    * */
   public int popAtStack(int index) {
     LinkedList<Integer> stack = listOfStacks.get(index);
+    if(stack == null) throw new EmptyStackException();
     int retVal =  stack.removeLast();
 
     while (index < listOfStacks.size()) {
