@@ -7,7 +7,7 @@ public class QueueViaTwoStacks<T> {
   /*
   * delegate to inner class
   * */
-  DoubleStackQueue<T> dsq = new DoubleStackQueue<>();
+  private final DoubleStackQueue<T> dsq = new DoubleStackQueue<>();
 
   static class DoubleStackQueue<T>{
 
@@ -37,6 +37,8 @@ public class QueueViaTwoStacks<T> {
         outgoing.add(incoming.removeLast());
       return outgoing.peekLast();
     }
+
+    int size(){return incoming.size() + outgoing.size();}
   }
 
   void enque(T item) { dsq.enque(item);}
@@ -44,4 +46,6 @@ public class QueueViaTwoStacks<T> {
   T deque() {return dsq.deque();}
 
   T peek() {return dsq.deque();}
+
+  int size() {return 0; }
 }

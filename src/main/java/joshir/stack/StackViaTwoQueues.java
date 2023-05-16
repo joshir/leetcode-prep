@@ -9,7 +9,7 @@ public class StackViaTwoQueues<T> {
   /*
   * delegate to inner class
   * */
-  private DoubleQStack<T> dq = new DoubleQStack<>();
+  private final DoubleQStack<T> dq = new DoubleQStack<>();
 
   /*
   * This is kind of sloppy since queues have a natural order (FIFO)
@@ -95,5 +95,7 @@ public class StackViaTwoQueues<T> {
 
   T pop() { return dq.pop(); }
 
-  T peek() { return dq.pop();}
+  T peek() { return dq.pop(); }
+
+  int size() {return dq.size(); }
 }
