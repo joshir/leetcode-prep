@@ -7,6 +7,11 @@ import java.util.LinkedList;
 public class StackViaTwoQueues<T> {
 
   /*
+  * delegate to inner class
+  * */
+  private DoubleQStack<T> dq = new DoubleQStack<>();
+
+  /*
   * This is kind of sloppy since queues have a natural order (FIFO)
   * whereas stacks have reverse order (LIFO) which means using two queue
   * will require more shuffling of data between the two queues than
@@ -85,4 +90,10 @@ public class StackViaTwoQueues<T> {
       return (q1.size() != 0) ? q1.size() : q2.size();
     }
   }
+
+  void push(T item) { dq.push(item); }
+
+  T pop() { return dq.pop(); }
+
+  T peek() { return dq.pop();}
 }
