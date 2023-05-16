@@ -18,7 +18,7 @@ public class SimpleHeap<T extends Comparable<? super T>> {
    * if the default comparable behaviour is unacceptable,
    * override the comparator in the cons
    * */
-  private Comparator<? super T> comparator = (o1, o2) -> o1.compareTo(o2);
+  private Comparator<? super T> comparator = Comparator.naturalOrder();
 
   public SimpleHeap() {
     this(defaultSize);
@@ -55,10 +55,10 @@ public class SimpleHeap<T extends Comparable<? super T>> {
   * */
   public void add (T el) {
     Objects.requireNonNull(el, "Argument must not be null");
-    if (next > arr.length) throw new IndexOutOfBoundsException();
+    if (next > arr.length - 1) throw new IndexOutOfBoundsException();
 
     arr[next++] = el;
-    upheapify();
+    heapify(next -1);
   }
 
   /*
@@ -67,7 +67,7 @@ public class SimpleHeap<T extends Comparable<? super T>> {
   * */
   public T remove() {
     T remove = arr[0];
-    downheapify();
+    reverseHeapify(0);
     return remove;
   }
 
@@ -82,11 +82,34 @@ public class SimpleHeap<T extends Comparable<? super T>> {
   * O(logn) mutation to maintain heap order after addition of
   * a new element
   * */
-  private void upheapify() {}
+  private void heapify(int index ) {
+    if (index == 0) return;
+    T temp;
+    int parent = parent(index);
+
+    if(comparator.compare(arr[index], arr[parent]) > 0){
+      temp = arr[index];
+      arr[index] = arr[parent];
+      arr[parent] = temp;
+      heapify(parent);
+    }
+  }
 
   /*
    * O(logn) mutation to maintain heap order after removal
    * of the root element
    * */
-  private void downheapify() {}
+  private void reverseHeapify(int index) {
+    if(index > arr.length/2) return;
+    int left = left(index), right = right(index), i;
+    T temp = arr[index],
+      tmin = comparator.compare(arr[left], arr[right]) > 0 ? arr[left]: arr[right];
+
+    if(comparator.compare(arr[index], tmin) > 0) {
+      arr[index] = tmin;
+      tmin = temp;
+      i = arr[left] == tmin ? left: right;
+      reverseHeapify(i);
+    }
+  }
 }
