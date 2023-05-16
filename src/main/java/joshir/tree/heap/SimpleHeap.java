@@ -67,6 +67,7 @@ public class SimpleHeap<T extends Comparable<? super T>> {
   * */
   public T remove() {
     T remove = arr[0];
+    arr[0] = arr[--next];
     reverseHeapify(0);
     return remove;
   }
