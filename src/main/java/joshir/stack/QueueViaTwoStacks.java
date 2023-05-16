@@ -9,28 +9,16 @@ public class QueueViaTwoStacks<T> {
   * */
   DoubleStackQueue<T> dsq = new DoubleStackQueue<>();
 
-  /*
-  * incoming is a stack that accepts all incoming elements and
-  * outgoing is a stack that accepts elements from the incoming
-  * stack. order of insertion is maintained overall because
-  * the first stack reverses the order and the second stack undoes the first.
-  * */
   static class DoubleStackQueue<T>{
 
-    /* incoming stack for insertions*/
+    /* incoming stack for insertions */
     final LinkedList<T> incoming = new LinkedList<>();
 
-    /* outgoing stack for extractions*/
+    /* outgoing stack for extractions */
     final LinkedList<T> outgoing = new LinkedList<>();
 
     void enque(T item) {
       incoming.add(item);
-    }
-
-
-    T deque() {
-      drain();
-      return outgoing.removeLast();
     }
 
     /*
@@ -38,13 +26,15 @@ public class QueueViaTwoStacks<T> {
      * because we don't want to disrupt the order of older elements on the
      * outgoing stack with the new element from the incoming stack
      * */
-    private void drain() {
+    T deque() {
       while(outgoing.isEmpty() && !incoming.isEmpty())
         outgoing.add(incoming.removeLast());
+      return outgoing.removeLast();
     }
 
     T peek() {
-      drain();
+      while(outgoing.isEmpty() && !incoming.isEmpty())
+        outgoing.add(incoming.removeLast());
       return outgoing.peekLast();
     }
   }
