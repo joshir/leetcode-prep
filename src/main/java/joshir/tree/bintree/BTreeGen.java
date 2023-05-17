@@ -1,4 +1,4 @@
-package joshir.tree.btree;
+package joshir.tree.bintree;
 
 import java.util.LinkedList;
 import java.util.Objects;

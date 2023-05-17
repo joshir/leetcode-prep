@@ -11,9 +11,7 @@ public class MaxHistogramArea {
   private static final HashMap<Integer, Pair> map = new HashMap<>();
 
   final static class Pair {
-
     Integer i1;
-
     Integer i2;
   }
 
