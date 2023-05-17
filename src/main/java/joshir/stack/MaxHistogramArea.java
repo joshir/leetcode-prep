@@ -15,7 +15,6 @@ public class MaxHistogramArea {
     Integer i2;
   }
 
-
   public static int getMaxHistogramArea(int[] arr) {
 
     /* find left boundary */
@@ -27,7 +26,7 @@ public class MaxHistogramArea {
     for (int i = 1; i < arr.length; i++){
       p1 = new Pair();
       while(!stack.isEmpty() && arr[stack.peekLast()] > arr[i])
-        stack.pop();
+        stack.removeLast();
       if(stack.isEmpty()) {
         p1.i1 = -1;
         map.put(i, p1);
@@ -46,7 +45,7 @@ public class MaxHistogramArea {
     pr.i2 = arr.length;  /* no smaller element for the rightmost element */
     for(int i = arr.length - 2; i >= 0; i--){
       while(!stack.isEmpty() && arr[i] < arr[stack.peekLast()])
-        stack.pop();
+        stack.removeLast();
       if(stack.isEmpty())
         map.get(i).i2 = arr.length;
       else if(!stack.isEmpty() && arr[i] > arr[stack.peekLast()])
@@ -58,13 +57,13 @@ public class MaxHistogramArea {
     int maxArea = 0;
     for (int i = 0; i < map.size(); i++){
       pair = map.get(i);
-      maxArea = Math.max(maxArea, (pair.i2 - pair.i1) * arr[i] );
+      maxArea = Math.max(maxArea, (pair.i2 - pair.i1 - 1) * arr[i] );
     }
     return maxArea;
   }
 
   public static void main(String[] args) {
-    int[] arr = {2,6,1,3,4,7,9,22};
+    int[] arr = {6,2,5,4,5,1,6};
     System.out.println(getMaxHistogramArea(arr));
   }
 }
