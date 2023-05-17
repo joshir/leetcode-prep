@@ -2,7 +2,6 @@ package joshir.stack;
 
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Map;
 
 public class MaxHistogramArea {
 
@@ -20,13 +19,17 @@ public class MaxHistogramArea {
     /* find left boundary */
     Pair pl = new Pair();
     pl.i1 = -1;  /* no smaller element for the leftmost element */
+    pl.i2 = -1;
     stack.add(0);
     map.put(0,pl);
     Pair p1;
     for (int i = 1; i < arr.length; i++){
       p1 = new Pair();
-      while(!stack.isEmpty() && arr[stack.peekLast()] > arr[i])
-        stack.removeLast();
+      while(!stack.isEmpty() && arr[stack.peekLast()] > arr[i]){
+        /* next smaller el on the right */
+        map.get(stack.removeLast()).i2 = i;
+      }
+
       if(stack.isEmpty()) {
         p1.i1 = -1;
         map.put(i, p1);
@@ -38,20 +41,13 @@ public class MaxHistogramArea {
       stack.add(i);
     }
 
-    /* find right boundary */
-    stack.clear();
-    stack.add(arr.length - 1);
-    Pair pr = map.get(arr.length-1);
-    pr.i2 = arr.length;  /* no smaller element for the rightmost element */
-    for(int i = arr.length - 2; i >= 0; i--){
-      while(!stack.isEmpty() && arr[i] < arr[stack.peekLast()])
-        stack.removeLast();
-      if(stack.isEmpty())
-        map.get(i).i2 = arr.length;
-      else if(!stack.isEmpty() && arr[i] > arr[stack.peekLast()])
-        map.get(i).i2 = stack.peekLast();
-      stack.add(i);
-    }
+    /*
+     * elements that are still on the stack represent
+     * those that could not be displaced,
+     * so they have no smaller elements on the right
+     * */
+    while(!stack.isEmpty())
+      map.get(stack.removeLast()).i2 = arr.length;
 
     Pair pair;
     int maxArea = 0;
