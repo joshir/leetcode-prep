@@ -72,5 +72,4 @@ public class Brackets {
     testSet.forEach(st-> System.out.println(isBalanced(st)));
     testSet.forEach(st-> System.out.println(hasSuperfluous(st)));
   }
-
 }

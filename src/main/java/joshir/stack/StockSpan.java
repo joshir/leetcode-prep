@@ -21,12 +21,13 @@ public class StockSpan {
     stack.add(0);
     span_arr[0] = 1;  /* span to the right of leftmost element is 1*/
     for(int i = 1; i < arr.length; i++) {
-      while(stack.size()>0 && arr[i] > arr[stack.peekLast()]) {
-        span_arr[i] = i + 1;
+      while(stack.size() > 0 && arr[i] > arr[stack.peekLast()])
         stack.removeLast();
-      }
-      if(stack.size()>0 && arr[i] < arr[stack.peekLast()])
+
+      if (stack.size() == 0) span_arr[i] = i + 1;
+      else if(stack.size()>0 && arr[i] < arr[stack.peekLast()])
         span_arr[i] = i - stack.peekLast();
+
       stack.add(i);
     }
     stack.clear();
