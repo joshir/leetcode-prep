@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 class StockSpanner {
 
-  int spanCallCount = 0;
+  private int spanCallCount = 0;
 
   static class Pair {
     int price;
@@ -15,10 +15,10 @@ class StockSpanner {
     }
   }
 
-  private static LinkedList<Pair>  stack = new LinkedList<>();
+  private LinkedList<Pair>  stack = new LinkedList<>();
 
   public StockSpanner() {
-    stack.add(new Pair( (int)Math.pow(10,5) + 1, -1));
+    stack.add(new Pair((int) Math.pow(10,5) + 1, -1));
   }
 
   public int next(int price) {
