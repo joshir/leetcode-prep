@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 class StockSpanner {
 
-  static int spanCallCount = 0;
+  int spanCallCount = 0;
 
   static class Pair {
     int price;
