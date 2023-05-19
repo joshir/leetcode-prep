@@ -23,11 +23,7 @@ public class StockSpan {
     for(int i = 1; i < arr.length; i++) {
       while(stack.size() > 0 && arr[i] > arr[stack.peekLast()])
         stack.removeLast();
-
-      if (stack.size() == 0) span_arr[i] = i + 1;
-      else if(stack.size()>0 && arr[i] < arr[stack.peekLast()])
-        span_arr[i] = i - stack.peekLast();
-
+      span_arr[i] = stack.size() == 0 ? i + 1: i - stack.peekLast() ;
       stack.add(i);
     }
     stack.clear();
