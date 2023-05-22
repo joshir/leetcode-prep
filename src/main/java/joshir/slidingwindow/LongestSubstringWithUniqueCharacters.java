@@ -13,7 +13,7 @@ public class LongestSubstringWithUniqueCharacters {
     char curr;
     while(e < str.length()-1) {
       curr = str.charAt(++e);
-      if (map.containsKey(curr))
+      if (map.containsKey(curr) && map.get(curr) >= s)
         s = map.get(curr) + 1;
       map.put(curr, e);
       if(e - s + 1 > maxlength){
@@ -26,6 +26,6 @@ public class LongestSubstringWithUniqueCharacters {
 
 
   public static void main(String[] args) {
-    System.out.println(longestSubstringWithUniqueChars("whatwhywhere"));
+    System.out.println(longestSubstringWithUniqueChars("absndsewa"));
   }
 }
