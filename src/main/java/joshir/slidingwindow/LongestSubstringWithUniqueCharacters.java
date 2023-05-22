@@ -16,10 +16,9 @@ public class LongestSubstringWithUniqueCharacters {
       if (map.containsKey(curr) && map.get(curr) >= s)
         s = map.get(curr) + 1;
       map.put(curr, e);
-      if(e - s + 1 > maxlength){
-        maxlength = e - s + 1;
-        substr = str.substring(s,e+1);
-      }
+
+      maxlength = Math.max(e - s + 1, maxlength);
+      substr = str.substring(s, maxlength+s);
     }
     return substr;
   }
