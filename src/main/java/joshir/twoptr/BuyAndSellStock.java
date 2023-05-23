@@ -1,13 +1,9 @@
 package joshir.twoptr;
 
 public class BuyAndSellStock {
-
   static class Window {
-
     int buy;
-
     int sell;
-
     Window(int b, int s) {
       this.buy = b;
       this.sell = s;
