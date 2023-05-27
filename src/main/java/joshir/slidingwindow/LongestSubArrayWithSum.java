@@ -6,11 +6,9 @@ public class LongestSubArrayWithSum {
   }
 
   public int findLength(int[] nums, int k) {
-    int left = 0;
-    int curr = 0;
     int ans = 0;
 
-    for (int right = 0; right < nums.length; right++) {
+    for (int right = 0, left = 0, curr = 0; right < nums.length; right++) {
       curr += nums[right];
       while (curr > k) {
         curr -= nums[left];
@@ -19,7 +17,6 @@ public class LongestSubArrayWithSum {
 
       ans = Math.max(ans, right - left + 1);
     }
-
     return ans;
   }
 }
