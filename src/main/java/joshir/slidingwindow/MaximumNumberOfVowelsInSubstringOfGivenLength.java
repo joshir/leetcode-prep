@@ -15,9 +15,11 @@ public class MaximumNumberOfVowelsInSubstringOfGivenLength {
       curr = s.charAt(right);
       if(vowels.contains(curr)) count++;
 
-      if((right+1) % k == 0) {
+      if (right >= k - 1) {
         maxcount = Math.max(count, maxcount);
-        count = 0;
+        if (vowels.contains(s.charAt(right-k+1))){
+          count--;
+        }
       }
     }
     return maxcount;
