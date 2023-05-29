@@ -1,4 +1,4 @@
-package joshir.recursion.v16;
+package joshir.recursion.one;
 
 public class LastIndex {
   public static void main(String[] args) {

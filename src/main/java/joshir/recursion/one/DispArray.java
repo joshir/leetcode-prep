@@ -1,4 +1,4 @@
-package joshir.recursion.v12;
+package joshir.recursion.one;
 
 public class DispArray {
   public static void main(String[] args) {

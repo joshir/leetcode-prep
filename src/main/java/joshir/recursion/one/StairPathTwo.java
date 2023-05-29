@@ -1,4 +1,4 @@
-package joshir.recursion.v20;
+package joshir.recursion.one;
 
 public class StairPathTwo {
   public static void main(String[] args) {

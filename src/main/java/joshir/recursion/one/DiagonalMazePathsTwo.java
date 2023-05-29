@@ -1,4 +1,4 @@
-package joshir.recursion.v22;
+package joshir.recursion.one;
 
 import java.util.stream.IntStream;
 

@@ -1,4 +1,4 @@
-package joshir.recursion.v10;
+package joshir.recursion.one;
 
 import java.util.Scanner;
 

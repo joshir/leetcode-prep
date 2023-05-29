@@ -1,4 +1,4 @@
-package joshir.recursion.v21;
+package joshir.recursion.one;
 public class MazePathsTwo {
   public static void main(String[] args) {
     getMazePaths(0,0,2,2, "");
