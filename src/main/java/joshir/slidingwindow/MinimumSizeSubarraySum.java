@@ -7,8 +7,7 @@ public class MinimumSizeSubarraySum {
       sum += nums[right];
       while(sum >= target) {
         ans = Math.min(right - left + 1, ans );
-        sum-=nums[left];
-        left++;
+        sum-=nums[left++];
       }
     }
     return ans;
