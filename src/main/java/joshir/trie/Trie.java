@@ -1,4 +1,4 @@
-package joshir.Trie;
+package joshir.trie;
 
 public class Trie {
 }
