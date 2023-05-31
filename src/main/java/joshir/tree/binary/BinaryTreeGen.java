@@ -1,11 +1,11 @@
-package joshir.tree.bintree;
+package joshir.tree.binary;
 
 import java.util.LinkedList;
 import java.util.Objects;
 
 import static joshir.tree.Common.bTree;
 
-public class BTreeGen {
+public class BinaryTreeGen {
 
   /*
    * Reusable Tree class where E represents node TNode or any extension of the TNode class
