@@ -13,7 +13,7 @@ public class BinaryTreeGen {
    * or doesn't, in which case it's super class must. This narrows down K to a particular type
    * but also relaxes the restriction
    * */
-  private static class TNodeTree<E extends TNode<T> , T extends Comparable<? super T>>{
+  static class TNodeTree<E extends TNode<T> , T extends Comparable<? super T>>{
 
     /* package public by default */
     final E root;
@@ -22,7 +22,7 @@ public class BinaryTreeGen {
     }
   }
 
-  private static class TNode<T extends Comparable<? super T>> {
+  static class TNode<T extends Comparable<? super T>> {
 
     /* package public by default */
     T data;
