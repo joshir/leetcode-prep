@@ -36,7 +36,7 @@ public class Brackets {
         stack.add(c);
       else if(reverse.containsKey(c)){   /* ignore numbers and such; we are only concerned with checking "bracket balance" */
         if(reverse.get(c) == stack.peekLast())
-          stack.removeLast();
+          stack.removeLast(); /* pop matching opening bracket, if it matches the corresponding forward bracket for current reverse bracket */
         else
           break;
       }
