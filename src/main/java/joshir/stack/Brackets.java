@@ -34,7 +34,7 @@ public class Brackets {
       char c = str.charAt(i);
       if(forward.containsKey(c))
         stack.add(c);
-      else if(reverse.containsKey(c)){
+      else if(reverse.containsKey(c)){   /* ignore numbers and such; we are only concerned with checking "bracket balance" */
         if(reverse.get(c) == stack.peekLast())
           stack.removeLast();
         else
