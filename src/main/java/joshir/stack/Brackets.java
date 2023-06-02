@@ -7,7 +7,7 @@ import java.util.Map;
 public class Brackets {
 
   /* package public by default */
-  static final LinkedList<Character> stack = new LinkedList<>();
+  static final LinkedList<Character> stack = new LinkedList<>();  /* TODO replace with an indexed stack at some point*/
 
   /* test sets */
   static final List<String> testSet = List.of(
@@ -55,11 +55,13 @@ public class Brackets {
     for(int i = 0; i < str.length(); i++){
       char c = str.charAt(i);
       if(reverse.containsKey(c)){
-        if(stack.peekLast() == reverse.get(c)) {
+        if(stack.peekLast() == reverse.get(c)) {    /* if c == } and what's on top of the stack is {, you have extra brackets. */
           stack.clear();
           return true;
         }
-        while(stack.size()>0 && stack.removeLast() != reverse.get(c)) ;
+        /* if c == } is not matched by { on tos, keep popping until a1. it's empty or a2. has a match for c */
+        while(stack.size()>0 && stack.peekLast() != reverse.get(c))
+          stack.removeLast();
       }
       else
         stack.add(c);
