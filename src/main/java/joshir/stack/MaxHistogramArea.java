@@ -25,6 +25,7 @@ public class MaxHistogramArea {
     map.put(0,temp);
     for (int i = 1; i < arr.length; i++){
       temp = new Pair();
+      /* tos is always the max element on the stack */
       while(!stack.isEmpty() && arr[stack.peekLast()] >= arr[i]){
         /* next smaller el on the right */
         map.get(stack.removeLast()).i2 = i;
