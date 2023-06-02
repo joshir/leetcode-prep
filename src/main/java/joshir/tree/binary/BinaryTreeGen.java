@@ -109,7 +109,7 @@ public class BinaryTreeGen {
   /*
    * depth traversal
    * */
-  private static void displayInDepth(final TNode<Integer> root) {
+  static void displayInDepth(final TNode<Integer> root) {
     if(root == null) return;
     System.out.println(root.data);
     displayInDepth(root.left);
