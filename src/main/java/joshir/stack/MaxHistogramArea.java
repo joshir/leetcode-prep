@@ -5,8 +5,9 @@ import java.util.LinkedList;
 
 public class MaxHistogramArea {
 
-  private static final LinkedList<Integer> stack = new LinkedList<>();
+  private static final LinkedList<Integer> stack = new LinkedList<>(); /* TODO use indexed stack or ArrayDeque as a stack */
 
+  /* current entry mapped to pair with smaller el on left and right for this entry */
   private static final HashMap<Integer, Pair> map = new HashMap<>();
 
   final static class Pair {
@@ -29,6 +30,7 @@ public class MaxHistogramArea {
         map.get(stack.removeLast()).i2 = i;
       }
 
+      /* if stack is empty, there's no smaller element on the left; otherwise, what's on top of the stack is what's smaller on the left*/
       temp.i1 = stack.isEmpty() ? -1 : stack.peekLast();
       map.put(i, temp);
       stack.add(i);
