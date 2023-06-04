@@ -1,4 +1,4 @@
-package joshir.tree.gen;
+package joshir.tree.generic.tree;
 
 import java.util.*;
 
