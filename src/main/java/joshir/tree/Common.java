@@ -1,19 +1,11 @@
 package joshir.tree;
 
-import javax.print.URIException;
-import java.io.*;
-import java.net.URI;
+import java.io.IOException;
 import java.net.URISyntaxException;
-import java.net.URL;
-import java.net.URLClassLoader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Properties;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Common {
@@ -68,6 +60,10 @@ public class Common {
   );
 
 
+
+  /*
+  * read entries from megaTree.properties
+  * */
   public static final List<Integer> megaTree() {
     List<Integer> list = null;
     try (Stream<String> stream = Files.lines(Paths.get(Thread.currentThread().getContextClassLoader().getResource("megaTree.properties").toURI()))) {
