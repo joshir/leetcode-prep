@@ -1,5 +1,7 @@
 package joshir.tree.binary;
 
+import joshir.tree.Common;
+
 import static joshir.tree.binary.BinaryTreeGen.displayInDepth;
 import static joshir.tree.binary.BinaryTreeGen.generate;
 
@@ -12,5 +14,6 @@ public class MinDepth {
   public static void main(String[] args) {
     BinaryTreeGen.TNodeTree<BinaryTreeGen.TNode<Integer>,Integer> tree = generate();
     System.out.println(new MaxDepth().maxDepth(tree.root));
+    Common.megaTree();
   }
 }
