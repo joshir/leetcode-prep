@@ -12,8 +12,7 @@ public class MinDepth {
   }
 
   public static void main(String[] args) {
-    BinaryTreeGen.TNodeTree<BinaryTreeGen.TNode<Integer>,Integer> tree = generate();
+    BinaryTreeGen.TNodeTree<BinaryTreeGen.TNode<Integer>,Integer> tree = generate(Common.megaTree());
     System.out.println(new MaxDepth().maxDepth(tree.root));
-    Common.megaTree();
   }
 }

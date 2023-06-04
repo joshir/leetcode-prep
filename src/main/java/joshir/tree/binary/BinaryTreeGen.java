@@ -1,6 +1,9 @@
 package joshir.tree.binary;
 
+import joshir.tree.Common;
+
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
 
 import static joshir.tree.Common.bTree;
@@ -47,7 +50,7 @@ public class BinaryTreeGen {
   }
 
   public static void main(String[] args) {
-    TNodeTree<TNode<Integer>,Integer> tree = generate();
+    TNodeTree<TNode<Integer>,Integer> tree = generate(Common.bTree);
     TNode<Integer> root = tree.root;
     TNodeTree<TNode<Integer>,Integer> nTree= copy(tree);
 
@@ -60,11 +63,11 @@ public class BinaryTreeGen {
   * in-order tree generation from in-order
   * list of tree nodes
   * */
-  public static TNodeTree<TNode<Integer>,Integer> generate() {
+  public static TNodeTree<TNode<Integer>,Integer> generate(List<Integer> tree) {
     TNodeTree<TNode<Integer>,Integer> top = null;
     LinkedList<TNode<Integer>> stack = new LinkedList<>();
     TNode<Integer> parent, node;
-    for(int data : bTree){
+    for(int data : tree){
       parent = stack.peekLast();
       if(data != -1) {
         node = new TNode<>(data);
