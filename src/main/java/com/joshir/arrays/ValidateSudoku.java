@@ -24,11 +24,12 @@ public class ValidateSudoku {
       for(int o = 1; o < 10; o++) {
         if(xfreq[o] > 1 || yfreq[o] > 1 || sfreq[o] > 1){
           return false;
+        }else {
+          xfreq[o] = 0;
+          yfreq[o] = 0;
+          sfreq[o] = 0;
         }
       }
-      Arrays.fill(xfreq, 0);
-      Arrays.fill(yfreq, 0);
-      Arrays.fill(sfreq, 0);
     }
     return true;
   }
