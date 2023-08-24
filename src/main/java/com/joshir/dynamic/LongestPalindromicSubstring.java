@@ -47,11 +47,11 @@ public class LongestPalindromicSubstring {
           start = i;
           end = j;
         }
-      }else
+      }else {
         cache[i][j] = 0;
-
-      longestPalindrome(s, i + 1, j);
-      longestPalindrome(s, i, j - 1);
+        longestPalindrome(s, i + 1, j);
+        longestPalindrome(s, i, j - 1);
+      }
 
       return cache[i][j];
     }
