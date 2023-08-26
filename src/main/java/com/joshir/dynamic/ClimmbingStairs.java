@@ -34,7 +34,4 @@ public class ClimmbingStairs {
       return sum;
     }
   }
-
-
-
 }
