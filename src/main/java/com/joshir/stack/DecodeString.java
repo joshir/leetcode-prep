@@ -18,7 +18,13 @@ public class DecodeString {
           ss.append(dq.removeLast());
 
         dq.removeLast();
-        ss.append(ss.reverse().toString().repeat(dq.removeLast() - '0' - 1));
+        int digit = 0, number = 0, power = 0;
+        while(!dq.isEmpty() && Character.isDigit(dq.peekLast())){
+          digit = Character.getNumericValue(dq.removeLast());
+          number += (int) Math.pow(10, power++) * digit;
+        }
+
+        ss.append(ss.reverse().toString().repeat(number - 1));
 
         int n = 0;
         while(n < ss.length())
