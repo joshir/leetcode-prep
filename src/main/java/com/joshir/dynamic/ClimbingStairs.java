@@ -2,7 +2,7 @@ package com.joshir.dynamic;
 
 import java.util.Arrays;
 
-public class ClimmbingStairs {
+public class ClimbingStairs {
   // TLE
   class SolutionTopDown {
     public int climbStairs(int n) {
