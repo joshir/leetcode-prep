@@ -3,7 +3,7 @@ package com.joshir.binarysearch;
 public class Sqrt {
   class Solution {
     public int mySqrt(int x) {
-      if (x == 0 || x ==1) return x;
+      if (x == 0 || x == 1) return x;
       long n = 0;
 
       int mid, left = 2, right = x / 2;
