@@ -1,4 +1,4 @@
-package com.joshir.arrays.kadane;
+package com.joshir.dynamic.kadane;
 
 public class ZeroFilledSubArrays {
   public long zeroFilledSubarray(int[] nums) {
