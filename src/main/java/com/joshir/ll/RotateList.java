@@ -19,7 +19,7 @@ public class RotateList {
         temp = temp.next;
       }
 
-      k = k > c ? k%c: (k==c) ? 0 : k;
+      k = k > c ? k%c: k;
       // check if k == 0 after recaliberating k
       if(k == 0)
         return head;
