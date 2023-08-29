@@ -20,7 +20,7 @@ public class RotateList {
       }
 
       k = k > c ? k%c: k;
-      // check if k == 0 after recaliberating k
+      // check if k == 0 after recalibrating k
       if(k == 0)
         return head;
 
