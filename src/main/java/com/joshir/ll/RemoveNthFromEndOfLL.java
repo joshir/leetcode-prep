@@ -6,6 +6,26 @@ public class RemoveNthFromEndOfLL {
     ListNode next;
     ListNode(int val) { this.val = val; }
   }
+
+  public ListNode removeNthFromEndO1Space(ListNode head, int n) {
+    ListNode start = new ListNode(-1);
+    start.next = head;
+    ListNode fast = start;
+    ListNode slow = start;
+
+    for(int i = 1; i <= n; ++i)
+      fast = fast.next;
+
+    while(fast.next != null)
+    {
+      fast = fast.next;
+      slow = slow.next;
+    }
+
+    slow.next = slow.next.next;
+
+    return start.next;
+  }
   public ListNode removeNthFromEnd(ListNode head, int n) {
     if(head == null)
       return head;
