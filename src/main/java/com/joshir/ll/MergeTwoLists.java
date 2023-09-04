@@ -1,9 +1,7 @@
 package com.joshir.ll;
 
 public class MergeTwoLists {
-
   class Solution {
-
     private class ListNode {
       int val;
       ListNode next;
