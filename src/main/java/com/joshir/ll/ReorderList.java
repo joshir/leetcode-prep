@@ -4,6 +4,7 @@ public class ReorderList {
   public void reorderList(ListNode head) {
     ListNode temp = null, mid = mid(head);
     ListNode  p1 = head, p2 = rev(mid.next);
+    mid.next = null;
     while(p1 != null && p2 != null){
       temp = p1.next;
       p1.next = p2;
@@ -19,8 +20,6 @@ public class ReorderList {
       fast = fast.next.next;
       slow = slow.next;
     }
-
-    slow.next = null;
     return slow;
   }
 
