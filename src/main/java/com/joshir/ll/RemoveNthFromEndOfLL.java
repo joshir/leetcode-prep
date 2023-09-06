@@ -1,12 +1,6 @@
 package com.joshir.ll;
 
 public class RemoveNthFromEndOfLL {
-  private static class ListNode {
-    int val;
-    ListNode next;
-    ListNode(int val) { this.val = val; }
-  }
-
   public ListNode removeNthFromEndO1Space(ListNode head, int n) {
     ListNode start = new ListNode(-1);
     start.next = head;

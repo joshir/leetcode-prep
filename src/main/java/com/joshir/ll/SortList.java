@@ -2,11 +2,6 @@ package com.joshir.ll;
 
 public class SortList {
   class Solution {
-    private class ListNode {
-      int val;
-      ListNode next;
-      ListNode(int val) { this.val = val; }
-    }
     public ListNode sortList(ListNode head) {
       if(head == null || head.next == null)
         return head;

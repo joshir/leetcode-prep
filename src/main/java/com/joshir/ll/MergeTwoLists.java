@@ -2,11 +2,6 @@ package com.joshir.ll;
 
 public class MergeTwoLists {
   class Solution {
-    private class ListNode {
-      int val;
-      ListNode next;
-      ListNode(int val) { this.val = val; }
-    }
     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
       ListNode pre = new ListNode(-1);
       ListNode temp = pre;

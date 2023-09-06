@@ -2,11 +2,6 @@ package com.joshir.ll;
 
 public class RotateList {
   class Solution {
-    private static class ListNode {
-      int val;
-      ListNode next;
-      ListNode(int val) { this.val = val; }
-    }
     public ListNode rotateRight(ListNode head, int k) {
       if(k == 0 || head == null || head.next == null)
         return head;

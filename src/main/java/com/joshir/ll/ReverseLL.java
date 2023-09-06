@@ -3,12 +3,6 @@ package com.joshir.ll;
 public class ReverseLL {
   class Solutions {
     private ListNode newHead;
-    private class ListNode {
-      int val;
-      ListNode next;
-      ListNode(int val) { this.val = val; }
-    }
-
     public ListNode reverseList(ListNode head) {
       if (head == null || head.next == null)
         return head;

@@ -2,11 +2,6 @@ package com.joshir.ll;
 
 public class SwapNodesInPairs {
   class Solution {
-    private class ListNode {
-      int val;
-      ListNode next;
-      ListNode(int val) { this.val = val; }
-    }
     public ListNode swapPairs(ListNode head) {
       ListNode dummy = new ListNode(-1),prevNode = dummy;
       dummy.next = head;

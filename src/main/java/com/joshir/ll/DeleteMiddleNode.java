@@ -1,11 +1,6 @@
 package com.joshir.ll;
 
 public class DeleteMiddleNode {
-  private static class ListNode {
-    int val;
-    ListNode next;
-    ListNode(int val) { this.val = val; }
-  }
   public ListNode deleteMiddle(ListNode head) {
     if (head == null || head.next == null) return null;
 

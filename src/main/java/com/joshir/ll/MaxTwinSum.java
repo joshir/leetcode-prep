@@ -1,11 +1,6 @@
 package com.joshir.ll;
 
 public class MaxTwinSum {
-  private class ListNode {
-    int val;
-    ListNode next;
-    ListNode(int val) { this.val = val; }
-  }
   public int pairSum(ListNode head) {
     if(head == null)
       return 0;
