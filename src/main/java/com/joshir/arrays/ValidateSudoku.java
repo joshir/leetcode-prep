@@ -1,6 +1,5 @@
 package com.joshir.arrays;
 
-import java.util.Arrays;
 public class ValidateSudoku {
   public static boolean isValidSudoku(char[][] board) {
     int xfreq[] = new int[10];
