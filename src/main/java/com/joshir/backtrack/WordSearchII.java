@@ -5,10 +5,9 @@ import java.util.*;
 public class WordSearchII {
   static class Solution {
     private final List<String> res = new ArrayList<>();
-
     static class Trie {
-      Map<Character, Trie> map = new HashMap<>();
-      String word;
+      private final Map<Character, Trie> map = new HashMap<>();
+      private String word;
 
       private void addWord(String word) {
         Trie node = this;
@@ -62,6 +61,10 @@ public class WordSearchII {
       backtrack(board, i,j + 1, node);
       backtrack(board, i,j - 1, node);
       board[i][j] = x;
+
+      // remove trailing trie node if any climbing back down the call stack.
+      if(node.map.isEmpty())
+        trie.map.remove(x);
     }
   }
 
