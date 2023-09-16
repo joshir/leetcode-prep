@@ -64,7 +64,7 @@ public class MaxXorPair {
       int res = Integer.MIN_VALUE;
       for (int x: nums) {
         addNumber(x);
-        res = Math.min(res, maxima(x));
+        res = Math.max(res, maxima(x));
       }
       return res;
     }
