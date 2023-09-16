@@ -3,7 +3,7 @@ package com.joshir.trie;
 
 public class MaxXorPair {
   class Solutions {
-    private Trie root;
+    private Trie root = new Trie();
     static final class Trie {
       Trie zero;
       Trie one;
