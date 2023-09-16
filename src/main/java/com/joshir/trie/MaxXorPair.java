@@ -17,7 +17,7 @@ public class MaxXorPair {
         bit = (n>>i) & 1;
 
         // greedy choice is to xor with opposite msb of n
-        // so it bit is 1 choose trie.zero and if bit is 0 choose trie.one
+        // so if bit is 1 choose trie.zero and if bit is 0 choose trie.one
         if(bit == 0) {
           if(cur.one != null){
             cur = cur.one;
