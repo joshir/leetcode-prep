@@ -15,7 +15,7 @@ public class Kruskal {
      if (u == v)
        continue;
      uf.union(u, v);
-     mst[edgecounter++] = edges[i];
+     mst[++edgecounter] = edges[i];
     }
     return mst;
   }
