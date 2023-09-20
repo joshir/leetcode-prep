@@ -13,21 +13,24 @@ public class SudokuSolver {
       return true;
     }
 
-    private void backtrack(char[][] board, int row, int col) {
+    private boolean backtrack(char[][] board, int row, int col) {
       if (row == board.length) // all levels done
-        ;
+        return true;
       else if (col == board[0].length)
-        backtrack(board, row + 1, 0);
+        return backtrack(board, row + 1, 0);
       else if (board[row][col] != '.')
-        backtrack(board, row, col + 1);
+        return backtrack(board, row, col + 1);
       else {
         for (char possible = '1'; possible <= '9'; possible++) {
           if (isValidPlacement(board, row, col, possible)) {
             board[row][col] = possible;
-            backtrack(board, row, col + 1);
-            board[row][col] = '.';
+            if(backtrack(board, row, col + 1))
+              return true;
+            else
+              board[row][col] = '.';
           }
         }
+        return false;
       }
     }
 
