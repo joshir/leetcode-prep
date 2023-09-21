@@ -36,14 +36,7 @@ public class TopSort {
 
 
   public static void main(String[] args) {
-    var al = GraphUtils.adjacencyList(Arrays.asList(
-      new int[] {0,1},
-      new int[] {1,2},
-      new int[] {2,3},
-      new int[] {0,4},
-      new int[] {0,5},
-      new int[] {2,5}));
-
+    var al = GraphUtils.adjacencyList(GraphUtils.edges);
     new TopSort(al,6).topSort();
   }
 }

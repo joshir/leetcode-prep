@@ -3,6 +3,14 @@ package com.joshir.graph;
 import java.util.*;
 
 public class GraphUtils {
+  public static final List<int[]> edges = List.of((
+    new int[] {0,1},
+    new int[] {1,2},
+    new int[] {2,3},
+    new int[] {0,4},
+    new int[] {0,5},
+    new int[] {2,5});
+
   public static Map<Integer, List<Integer>> adjacencyList (List<int[]> edges) {
     var al = new HashMap<Integer, List<Integer>>();
     for (var e : edges) {
