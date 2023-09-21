@@ -1,12 +1,9 @@
 package com.joshir.graph;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class GraphUtils {
-  public static HashMap<Integer, List<Integer>> adjacencyList (List<int[]> edges) {
+  public static Map<Integer, List<Integer>> adjacencyList (List<int[]> edges) {
     var al = new HashMap<Integer, List<Integer>>();
     for (var e : edges) {
       var l = al.getOrDefault(e[0], new ArrayList<>());
@@ -14,6 +11,18 @@ public class GraphUtils {
       al.put(e[0],l);
     }
     return al;
+  }
+
+  public static Map<Integer, List<Integer>> reverse (Map<Integer, List<Integer>> al) {
+    var transpose = new HashMap<Integer, List<Integer>>();
+    for (var entry : al.entrySet()) {
+      for (int node: entry.getValue()) {
+        var list = transpose.getOrDefault(node, new ArrayList<>());
+        list.add(entry.getKey());
+        transpose.put(node, list);
+      }
+    }
+    return transpose;
   }
 
   public static void g (HashMap<Integer, List<Integer>> al) {
