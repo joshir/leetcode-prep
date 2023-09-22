@@ -3,7 +3,7 @@ package com.joshir.graph;
 import java.util.*;
 
 public class GraphUtils {
-  public static final List<int[]> edges = List.of((
+  public static final List<int[]> edges = List.of(
     new int[] {0,1},
     new int[] {1,2},
     new int[] {2,3},
@@ -11,17 +11,23 @@ public class GraphUtils {
     new int[] {0,5},
     new int[] {2,5});
 
-  public static Map<Integer, List<Integer>> adjacencyList (List<int[]> edges) {
+  public static Map<Integer, List<Integer>> adjacencyList(List<int[]> edges, boolean isDirected) {
     var al = new HashMap<Integer, List<Integer>>();
     for (var e : edges) {
       var l = al.getOrDefault(e[0], new ArrayList<>());
       l.add(e[1]);
       al.put(e[0],l);
+
+      if(!isDirected) {
+        var s = al.getOrDefault(e[1], new ArrayList<>());
+        s.add(e[0]);
+        al.put(e[1],s);
+      }
     }
     return al;
   }
 
-  public static Map<Integer, List<Integer>> reverse (Map<Integer, List<Integer>> al) {
+  public static Map<Integer, List<Integer>> reverse(Map<Integer, List<Integer>> al) {
     var transpose = new HashMap<Integer, List<Integer>>();
     for (var entry : al.entrySet()) {
       for (int node: entry.getValue()) {
@@ -33,9 +39,67 @@ public class GraphUtils {
     return transpose;
   }
 
-  public static void g (HashMap<Integer, List<Integer>> al) {
+  public static void g(HashMap<Integer, List<Integer>> al) {
     for (var e : al.entrySet()) {
       System.out.println(e.getKey() + " : " + Arrays.toString(e.getValue().toArray()));
     }
+  }
+
+  public static Set<Integer> dfs(Map<Integer, List<Integer>> al, int v) {
+    var visited = new HashMap<Integer, Boolean>();
+    Stack<Integer> q = new Stack<>();
+    Set<Integer> res = new HashSet<>();
+
+    for (int i = 0; i < v; i++)
+      visited.put(i, false);
+
+    for(int node = 0; node < v ; node++) { // g may be disconnected
+      if (!visited.getOrDefault(node,false)) {
+        q.push(node);
+        visited.put(node, true);
+        while(!q.isEmpty()) {
+          int front = q.pop();
+          res.add(front);
+          for (int n: al.getOrDefault(front, new ArrayList<>())) {
+            if(!visited.getOrDefault(n, false))
+              q.push(n);
+            visited.put(n, true);
+          }
+        }
+      }
+    }
+    return res;
+  }
+
+  public static Set<Integer> bfs(Map<Integer, List<Integer>> al, int v) {
+    var visited = new HashMap<Integer, Boolean>();
+    Queue<Integer> q = new ArrayDeque<>();
+    Set<Integer> res = new HashSet<>();
+
+    for (int i = 0; i < v; i++)
+      visited.put(i, false);
+
+    for(int node = 0; node < v ; node++) {
+      if (!visited.getOrDefault(node,false)) {
+        q.offer(node);
+        visited.put(node, true);
+        while(!q.isEmpty()) {
+          int front = q.poll();
+          res.add(front);
+          for (int n: al.getOrDefault(front, new ArrayList<>())) {
+            if(!visited.getOrDefault(n, false))
+              q.offer(n);
+              visited.put(n, true);
+          }
+        }
+      }
+    }
+    return res;
+  }
+
+  public static void main(String[] args) {
+    Set<Integer> l = dfs(adjacencyList(List.of(
+      new int[] {4,4}, new int[] {0,1}, new int[] {0,3}, new int[] {1,2},new int[] {2,3}),false), 4);
+    System.out.println(Arrays.toString(l.toArray()));
   }
 }
