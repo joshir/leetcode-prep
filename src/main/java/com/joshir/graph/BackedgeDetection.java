@@ -23,7 +23,7 @@ public class BackedgeDetection {
       if(visited[node] == 0)
         dfs(node, 0);
     }
-    return null;
+    return backedges;
   }
 
   private void dfs(int node, int parent) {
@@ -38,7 +38,6 @@ public class BackedgeDetection {
     }
     visited[node] = 2; // visited and off the call stack
   }
-
 
   public static void main(String[] args) {
     var al = GraphUtils.adjacencyList(GraphUtils.edges, false);
