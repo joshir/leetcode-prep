@@ -44,8 +44,10 @@ public class KahnTopoSort {
   public List<Integer> kahn() {
     /* initialize queue with edges that have no dependencies */
     for (int i = 0; i < vertices; i++)
-      if (indegree[i] == 0)
+      if (indegree[i] == 0){
         q.offer(i);
+        zero_indegree++;
+      }
 
     int n = 0;
     for (; !q.isEmpty() ; n++) {
@@ -53,8 +55,10 @@ public class KahnTopoSort {
       l.add(node);
       for (int neighbor : adj.getOrDefault(node, new ArrayList<>())) {
         /* "delete" the edge */
-        if (--indegree[neighbor] == 0)
+        if (--indegree[neighbor] == 0){
           q.offer(neighbor);
+          zero_indegree++;
+        }
       }
     }
 
@@ -73,8 +77,8 @@ public class KahnTopoSort {
     var k = new KahnTopoSort(6, new int[][]{
       {5,2},
       {5,0},
-      {4, 0},
-      {4, 1},
+      {4,0},
+      {4,1},
       {2,3},
       {3,1}});
     System.out.println(Arrays.toString(k.kahn().toArray()));
