@@ -8,7 +8,6 @@ import java.util.Map;
 public class BackedgeDetection {
   private int vertices;
   private Map<Integer, List<Integer>> adj;
-  private List<List<Integer>> ll = new ArrayList<>();
   private List<int[]> backedges = new ArrayList<>();
   private int[] visited;
 
@@ -32,8 +31,7 @@ public class BackedgeDetection {
       if (visited[n] == 0) { // uncharted territory
         dfs(n, node);
       }
-      else if (n != parent && visited[n] == 1) { // must be a backedge since it's currently on the call stack
-        backedges.add(new int[] {node, n});
+      else if (n != parent && visited[n] == 1) { // on the call stack and not equal to parent? must be a back-edge
       }
     }
     visited[node] = 2; // visited and off the call stack
