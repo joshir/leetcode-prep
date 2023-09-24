@@ -3,45 +3,80 @@ package com.joshir.graph.dag;
 import java.util.*;
 
 public class KahnTopoSort {
-  public List<Integer> kahn(int v, int[][] edges) {
-    int[] indegree = new int[v];
-    var adj = new HashMap<Integer, List<Integer>>();
-    var list = new ArrayList<Integer>();
 
+  /* count of vertex*/
+  private int vertices;
+
+  /* edges as x,y pair*/
+  private Map<Integer, List<Integer>> adj;
+
+  /* q for bfs*/
+  private Queue<Integer> q;
+
+  /* topological ordering out*/
+  private List<Integer> l;
+
+  /* count of indegree zero nodes after kahn is called*/
+  private int zero_indegree = -1;
+
+  /* in-degree for nodes 0 to V-1 */
+  private int[] indegree;
+
+  public KahnTopoSort(int vertices, int [][] edges) {
+    this.vertices = vertices;
+    this.indegree = new int[vertices];
+    this.adj = adjacencyWithInDegree(edges);
+    this.q = new ArrayDeque<>();
+    this.l = new ArrayList<>();
+  }
+
+  private Map<Integer, List<Integer>> adjacencyWithInDegree(int[][] edges) {
+    var adj = new HashMap<Integer, List<Integer>>();
     for (int[] e : edges) {
       var l = adj.getOrDefault(e[0], new ArrayList<>());
       l.add(e[1]);
       adj.put(e[0], l);
       indegree[e[1]]++;
     }
+    return adj;
+  }
 
-    Queue<Integer> queue = new ArrayDeque<>();
-    // initialize queue with edges that have no dependencies
-    for (int i = 0; i < v; i++) {
-      if (indegree[i] == 0) {
-        queue.offer(i);
-      }
-    }
+  public List<Integer> kahn() {
+    /* initialize queue with edges that have no dependencies */
+    for (int i = 0; i < vertices; i++)
+      if (indegree[i] == 0)
+        q.offer(i);
 
-    int n = 0; // count of nodes with indegree of 0
-    for ( ;!queue.isEmpty(); n++) {
-      int node = queue.poll();
-      list.add(node);
+    int n = 0;
+    for (; !q.isEmpty() ; n++) {
+      int node = q.poll();
+      l.add(node);
       for (int neighbor : adj.getOrDefault(node, new ArrayList<>())) {
-        // "delete" the edge
+        /* "delete" the edge */
         if (--indegree[neighbor] == 0)
-          queue.offer(neighbor);
+          q.offer(neighbor);
       }
     }
 
-    // side effect but who cares
-    System.out.println((v == n) ? "DAG" : "cycle present");
-    return list;
+
+    /* side effect but who cares */
+    System.out.println((vertices == n) ? "DAG" : "cycle present");
+    return l;
+  }
+
+  public boolean isDAG() {
+    kahn();
+    return zero_indegree == this.vertices;
   }
 
   public static void main(String[] args) {
-    System.out.println(
-      Arrays
-        .toString(new KahnTopoSort().kahn(6, new int[][]{{5,2},{5,0}, {4, 0}, {4, 1}, {2,3},{3,1}}).toArray()));
+    var k = new KahnTopoSort(6, new int[][]{
+      {5,2},
+      {5,0},
+      {4, 0},
+      {4, 1},
+      {2,3},
+      {3,1}});
+    System.out.println(Arrays.toString(k.kahn().toArray()));
   }
 }

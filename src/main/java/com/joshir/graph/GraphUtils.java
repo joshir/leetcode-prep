@@ -11,7 +11,7 @@ public class GraphUtils {
     new int[] {0,5},
     new int[] {2,5});
 
-  public static Map<Integer, List<Integer>> adjacencyList(List<int[]> edges, boolean isDirected) {
+  public static Map<Integer, List<Integer>> adjacencyList(boolean isDirected, List<int[]> edges) {
     var al = new HashMap<Integer, List<Integer>>();
     for (var e : edges) {
       var l = al.getOrDefault(e[0], new ArrayList<>());
@@ -97,9 +97,10 @@ public class GraphUtils {
     return res;
   }
 
-  public static void main(String[] args) {
-    Set<Integer> l = dfs(adjacencyList(List.of(
-      new int[] {4,4}, new int[] {0,1}, new int[] {0,3}, new int[] {1,2},new int[] {2,3}),false), 4);
-    System.out.println(Arrays.toString(l.toArray()));
+  public static  <T extends Integer> Map<Integer, List<Integer>> pairs( boolean isDirected , T... pairs) {
+    List<int[]> arr = new ArrayList<>();
+    for ( int i = 0; i < pairs.length - 1; i++)
+      arr.add(new int[] {pairs[i], pairs[i+1]});
+    return adjacencyList(arr, isDirected);
   }
 }

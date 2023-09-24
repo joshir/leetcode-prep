@@ -55,9 +55,8 @@ public class KosaRajuSCC {
   private void dfs(int node) {
     visited[node] = true;
     for (int n: al.getOrDefault(node, new ArrayList<>())) {
-      if (!visited[n]) {
+      if (!visited[n])
         dfs(n);
-      }
     }
     stack.add(node);
   }
@@ -75,20 +74,7 @@ public class KosaRajuSCC {
   }
 
   public static void main(String[] args) {
-    int n = new KosaRajuSCC(
-      GraphUtils.adjacencyList(List.of(
-        new int[] {0,1},
-        new int[] {1,2},
-        new int[] {2,0},
-        new int[] {2,3},
-        new int[] {3,4},
-        new int[] {4,5},
-        new int[] {5,6},
-        new int[] {6,7},
-        new int[] {4,7},
-        new int[] {6,4}
-        )
-      , true),8).kosaraju();
+    int n = new KosaRajuSCC(GraphUtils.pairs(true,0,1,1,2,2,0,2,3, 3,4,4,5,5,6,6,7,4,7,6,4), 8 ).kosaraju();
     System.out.println("Total number of components: "+ n);
   }
 }

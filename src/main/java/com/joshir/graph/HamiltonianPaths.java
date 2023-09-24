@@ -38,7 +38,7 @@ public class HamiltonianPaths {
     visited[node] = false;
   }
   public static void main(String[] args) {
-    var g = GraphUtils.adjacencyList(GraphUtils.edges, true);
+    var g = GraphUtils.adjacencyList(true, GraphUtils.edges);
     var ll = new HamiltonianPaths(6, g).hamiltonian();
     for (List l : ll)
       System.out.println(Arrays.toString(l.toArray()));

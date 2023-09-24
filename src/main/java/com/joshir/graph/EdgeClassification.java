@@ -14,7 +14,7 @@ public class EdgeClassification {
   }
 
   public static void main(String[] args) {
-    var g = GraphUtils.adjacencyList(GraphUtils.edges,false);
+    var g = GraphUtils.adjacencyList(false, GraphUtils.edges);
     new EdgeClassification(g, 6);
   }
 }
