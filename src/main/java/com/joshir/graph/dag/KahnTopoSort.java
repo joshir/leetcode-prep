@@ -1,8 +1,8 @@
-package com.joshir.graph;
+package com.joshir.graph.dag;
 
 import java.util.*;
 
-public class KahnTopSort {
+public class KahnTopoSort {
   public List<Integer> kahn(int v, int[][] edges) {
     int[] indegree = new int[v];
     var adj = new HashMap<Integer, List<Integer>>();
@@ -42,6 +42,6 @@ public class KahnTopSort {
   public static void main(String[] args) {
     System.out.println(
       Arrays
-        .toString(new KahnTopSort().kahn(6, new int[][]{{5,2},{5,0}, {4, 0}, {4, 1}, {2,3},{3,1}}).toArray()));
+        .toString(new KahnTopoSort().kahn(6, new int[][]{{5,2},{5,0}, {4, 0}, {4, 1}, {2,3},{3,1}}).toArray()));
   }
 }

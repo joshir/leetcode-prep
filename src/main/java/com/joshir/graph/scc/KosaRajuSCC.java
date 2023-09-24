@@ -5,7 +5,7 @@ import com.joshir.graph.GraphUtils;
 import java.util.*;
 
 // https://www.topcoder.com/thrive/articles/kosarajus-algorithm-for-strongly-connected-components
-public class KosarajuCountStronglyConnectedComponents {
+public class KosaRajuSCC {
   private Map<Integer, List<Integer>> al;
   private final Stack<Integer> stack;
   private final boolean[] visited;
@@ -14,7 +14,7 @@ public class KosarajuCountStronglyConnectedComponents {
   private final int v;
 
   @SuppressWarnings("unchecked")
-  KosarajuCountStronglyConnectedComponents(Map<Integer, List<Integer>> al, int max_nodes) {
+  KosaRajuSCC(Map<Integer, List<Integer>> al, int max_nodes) {
     this.v = max_nodes;
     this.al = al;
     this.stack = new Stack<>();
@@ -75,7 +75,7 @@ public class KosarajuCountStronglyConnectedComponents {
   }
 
   public static void main(String[] args) {
-    int n = new KosarajuCountStronglyConnectedComponents(
+    int n = new KosaRajuSCC(
       GraphUtils.adjacencyList(List.of(
         new int[] {0,1},
         new int[] {1,2},

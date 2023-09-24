@@ -1,14 +1,16 @@
-package com.joshir.graph;
+package com.joshir.graph.dag;
+
+import com.joshir.graph.GraphUtils;
 
 import java.util.*;
 
-public class TopSort {
+public class TopoSort {
   private final Map<Integer, List<Integer>> al;
   private final List<Integer> list;
   private final boolean[] visited;
   private int v = 0;
 
-  TopSort (Map<Integer, List<Integer>> al, int v) {
+  TopoSort(Map<Integer, List<Integer>> al, int v) {
     this.v = v;
     this.al = al;
     this.list = new ArrayList<>();
@@ -37,6 +39,6 @@ public class TopSort {
 
   public static void main(String[] args) {
     var al = GraphUtils.adjacencyList(GraphUtils.edges, true);
-    new TopSort(al,6).topSort();
+    new TopoSort(al,6).topSort();
   }
 }
