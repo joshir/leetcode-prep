@@ -99,8 +99,8 @@ public class GraphUtils {
 
   public static  <T extends Integer> Map<Integer, List<Integer>> pairs( boolean isDirected , T... pairs) {
     List<int[]> arr = new ArrayList<>();
-    for ( int i = 0; i < pairs.length - 1; i++)
+    for (int i = 0; i < pairs.length - 1; i++)
       arr.add(new int[] {pairs[i], pairs[i+1]});
-    return adjacencyList(arr, isDirected);
+    return adjacencyList(isDirected, arr);
   }
 }
