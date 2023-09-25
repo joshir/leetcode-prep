@@ -48,8 +48,8 @@ public class KahnTopoSort {
         q.offer(i);
       }
 
-    int n = 0;
-    for (; !q.isEmpty() ; n++) {
+
+    for (zero_indegree = 0; !q.isEmpty() ; zero_indegree++) {
       int node = q.poll();
       l.add(node);
       for (int neighbor : adj.getOrDefault(node, new ArrayList<>())) {
@@ -61,7 +61,7 @@ public class KahnTopoSort {
     }
 
     /* side effect but who cares */
-    System.out.println((vertices == (zero_indegree = n)) ? "DAG" : "cycle present");
+    System.out.println((vertices == zero_indegree) ? "DAG" : "cycle present");
     return l;
   }
 

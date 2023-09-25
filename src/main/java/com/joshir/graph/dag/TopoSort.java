@@ -17,7 +17,7 @@ public class TopoSort {
     this.visited = new boolean[v];
   }
 
-  public List<Integer> topSort() {
+  public List<Integer> topoSort() {
     for(int node = 0; node < v ; node++) {
       if (!visited[node]) {
         dfs(node);
@@ -39,6 +39,6 @@ public class TopoSort {
 
   public static void main(String[] args) {
     var al = GraphUtils.adjacencyList(true, GraphUtils.edges);
-    new TopoSort(al,6).topSort();
+    new TopoSort(al,6).topoSort();
   }
 }

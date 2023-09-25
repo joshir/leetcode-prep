@@ -74,7 +74,7 @@ public class KosaRajuSCC {
   }
 
   public static void main(String[] args) {
-    int n = new KosaRajuSCC(GraphUtils.pairs(true,0,1,1,2,2,0,2,3, 3,4,4,5,5,6,6,7,4,7,6,4), 8 ).kosaraju();
+    int n = new KosaRajuSCC(GraphUtils.pairs(true,0,1,1,2,2,0,2,3,3,4,4,5,5,6,6,7,4,7,6,4), 8 ).kosaraju();
     System.out.println("Total number of components: "+ n);
   }
 }
