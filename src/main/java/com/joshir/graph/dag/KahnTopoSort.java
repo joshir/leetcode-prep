@@ -46,7 +46,6 @@ public class KahnTopoSort {
     for (int i = 0; i < vertices; i++)
       if (indegree[i] == 0){
         q.offer(i);
-        zero_indegree++;
       }
 
     int n = 0;
@@ -57,14 +56,12 @@ public class KahnTopoSort {
         /* "delete" the edge */
         if (--indegree[neighbor] == 0){
           q.offer(neighbor);
-          zero_indegree++;
         }
       }
     }
 
-
     /* side effect but who cares */
-    System.out.println((vertices == n) ? "DAG" : "cycle present");
+    System.out.println((vertices == (zero_indegree = n)) ? "DAG" : "cycle present");
     return l;
   }
 
