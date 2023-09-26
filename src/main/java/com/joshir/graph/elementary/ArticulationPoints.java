@@ -1,5 +1,7 @@
 package com.joshir.graph.elementary;
 
+import com.joshir.graph.problems.GraphUtils;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -14,7 +16,7 @@ public class ArticulationPoints {
   private final List<Integer> aps = new ArrayList<>();
   private int clock;
 
-  public ArticulationPoints(int vertices, Map<Integer, List<Integer>> adj){
+  public ArticulationPoints(Map<Integer, List<Integer>> adj, int vertices){
     this.vertices = vertices;
     this.adj = adj;
     this.discovered = new int[vertices];
@@ -33,10 +35,10 @@ public class ArticulationPoints {
 
 
   private void dfs(int node, int parent) {
-    this.discovered[node] = this.lowlinked[node] = clock++;
+    discovered[node] = lowlinked[node] = clock++;
     int siblings = 0;
     for (int nbr : adj.getOrDefault(node, new ArrayList<>())) {
-      if (-1 == discovered[node]) {
+      if (-1 == discovered[nbr]) {
         siblings++;
         dfs(nbr, node);
         lowlinked[node] = Math.min(lowlinked[nbr], lowlinked[node]);
@@ -70,6 +72,19 @@ public class ArticulationPoints {
   }
 
   public static void main(String[] args) {
+    var es = new Integer [] {0,1,1,2,2,0,2,3,3,4,4,5,5,6,6,7,4,7,6,4};
 
+    var t = new ArticulationPoints(
+      GraphUtils.pairs(true,es),
+      GraphUtils.vertices(es));
+
+    System.out.println("articulation points: " +
+      Arrays.toString(t.articulationPoints().toArray()));
+
+    System.out.println("bridges: " +
+      t.bridges()
+        .stream()
+        .map(pair -> "("+ pair[0] + ", " + pair[1] + ") " )
+        .reduce("", String::concat));
   }
 }
