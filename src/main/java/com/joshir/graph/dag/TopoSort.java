@@ -38,7 +38,6 @@ public class TopoSort {
 
 
   public static void main(String[] args) {
-    var al = GraphUtils.adjacencyList(true, GraphUtils.edges);
-    new TopoSort(al,6).topoSort();
+    new TopoSort(GraphUtils.adjacencyList(true, GraphUtils.edges), GraphUtils.vertices(GraphUtils.edges)).topoSort();
   }
 }
