@@ -1,6 +1,8 @@
 package com.joshir.graph.problems;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class GraphUtils {
   public static final List<int[]> edges = List.of(
@@ -89,7 +91,7 @@ public class GraphUtils {
           for (int n: al.getOrDefault(front, new ArrayList<>())) {
             if(!visited.getOrDefault(n, false))
               q.offer(n);
-              visited.put(n, true);
+            visited.put(n, true);
           }
         }
       }
@@ -97,10 +99,21 @@ public class GraphUtils {
     return res;
   }
 
-  public static  Map<Integer, List<Integer>> pairs( boolean isDirected , Integer... pairs) {
+  public static Map<Integer, List<Integer>> pairs( boolean isDirected , Integer... pairs) {
     List<int[]> arr = new ArrayList<>();
     for (int i = 0; i < pairs.length - 1; i++)
       arr.add(new int[] {pairs[i], pairs[i+1]});
     return adjacencyList(isDirected, arr);
+  }
+
+  public static int vertices(Integer... pairs) {
+    return Stream.of(pairs).collect(Collectors.toSet()).size();
+  }
+
+  public static int vertices(List<int[]> pairs) {
+    Set<Integer> s = new HashSet<>();
+    pairs.forEach(p -> s.addAll(List.of(p[0], p[1])));
+
+    return s.size();
   }
 }
