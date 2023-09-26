@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 public class BackedgeDetection {
-  private int vertices;
-  private Map<Integer, List<Integer>> adj;
-  private List<int[]> backedges = new ArrayList<>();
-  private int[] visited;
+  private final int vertices;
+  private final Map<Integer, List<Integer>> adj;
+  private final List<int[]> backedges = new ArrayList<>();
+  private final int[] visited;
 
   public BackedgeDetection (int v, Map<Integer, List<Integer>> adj) {
     this.vertices = v;
@@ -27,11 +27,12 @@ public class BackedgeDetection {
 
   private void dfs(int node, int parent) {
     visited[node] = 1; // visited and on the call stack
-    for (int n : adj.getOrDefault(node, new ArrayList<>())) {
-      if (visited[n] == 0) { // uncharted territory
-        dfs(n, node);
+    for (int neighbor : adj.getOrDefault(node, new ArrayList<>())) {
+      if (visited[neighbor] == 0) { // uncharted territory
+        dfs(neighbor, node);
       }
-      else if (n != parent && visited[n] == 1) { // on the call stack and not equal to parent? must be a back-edge
+      else if (neighbor != parent && visited[neighbor] == 1) { // on the call stack and not equal to parent? must be a back-edge
+        backedges.add(new int[] {node, neighbor});
       }
     }
     visited[node] = 2; // visited and off the call stack
