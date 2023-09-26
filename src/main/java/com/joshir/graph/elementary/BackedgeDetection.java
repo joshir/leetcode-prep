@@ -42,6 +42,6 @@ public class BackedgeDetection {
 
   public static void main(String[] args) {
     var al = GraphUtils.adjacencyList(false, GraphUtils.edges);
-    System.out.println(Arrays.toString(new BackedgeDetection(6, al).detect().toArray()));
+    System.out.println(Arrays.toString(new BackedgeDetection(GraphUtils.vertices(GraphUtils.edges), al).detect().toArray()));
   }
 }
