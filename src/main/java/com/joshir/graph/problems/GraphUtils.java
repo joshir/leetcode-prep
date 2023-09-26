@@ -116,4 +116,8 @@ public class GraphUtils {
 
     return s.size();
   }
+
+  public static int vertices(int[][] pairs) {
+    return vertices(Arrays.stream(pairs).toList());
+  }
 }

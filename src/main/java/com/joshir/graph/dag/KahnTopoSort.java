@@ -1,5 +1,7 @@
 package com.joshir.graph.dag;
 
+import com.joshir.graph.problems.GraphUtils;
+
 import java.util.*;
 
 public class KahnTopoSort {
@@ -71,13 +73,15 @@ public class KahnTopoSort {
   }
 
   public static void main(String[] args) {
-    var k = new KahnTopoSort(6, new int[][]{
+    var es = new int[][]{
       {5,2},
       {5,0},
       {4,0},
       {4,1},
       {2,3},
-      {3,1}});
+      {3,1}};
+
+    var k = new KahnTopoSort(GraphUtils.vertices(es), es);
     System.out.println(Arrays.toString(k.kahn().toArray()));
   }
 }
