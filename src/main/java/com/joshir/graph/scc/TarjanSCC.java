@@ -55,7 +55,11 @@ public class TarjanSCC {
   }
 
   public static void main(String args[]) {
-    var t = new TarjanSCC(GraphUtils.pairs(true,0,1,1,2,2,0,2,3,3,4,4,5,5,6,6,7,4,7,6,4), 8 );
+    var es = new Integer [] {0,1,1,2,2,0,2,3,3,4,4,5,5,6,6,7,4,7,6,4};
+
+    var t = new TarjanSCC(
+      GraphUtils.pairs(true,es), 
+      GraphUtils.vertices(es));
     t.tarjan();
   }
 }
