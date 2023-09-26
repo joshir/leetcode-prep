@@ -1,4 +1,4 @@
-package com.joshir.graph;
+package com.joshir.graph.problems;
 
 import java.util.ArrayList;
 import java.util.Arrays;

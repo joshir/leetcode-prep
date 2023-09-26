@@ -1,4 +1,4 @@
-package com.joshir.graph;
+package com.joshir.graph.problems;
 
 public class WordSearch {
   public class Solution{

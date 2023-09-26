@@ -1,5 +1,7 @@
-package com.joshir.graph;
+package com.joshir.graph.elementary;
 
+
+import com.joshir.graph.problems.GraphUtils;
 
 import java.util.*;
 

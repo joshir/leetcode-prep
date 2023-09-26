@@ -1,6 +1,6 @@
 package com.joshir.graph.scc;
 
-import com.joshir.graph.GraphUtils;
+import com.joshir.graph.problems.GraphUtils;
 
 import java.util.*;
 
