@@ -1,9 +1,9 @@
 package com.joshir.graph.mst;
 
 public class UnionFind {
-  private int size;
-  private int[] parent;
-  private int[] rank;
+  private final int size;
+  private final int[] parent;
+  private final int[] rank;
 
   public UnionFind(int size) {
     this.size = size;

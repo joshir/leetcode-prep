@@ -5,13 +5,13 @@ import java.util.Comparator;
 
 public class Kruskal {
   /* vertex count*/
-  private int vertices;
+  private final int vertices;
   /* edge in */
-  private Edge[] edges;
+  private final Edge[] edges;
   /* disjoint set for connected components */
-  private UnionFind uf;
+  private final UnionFind uf;
   /* min span tree out */
-  private Edge[] mst;
+  private final Edge[] mst;
 
   public Kruskal (Edge[] edges, int v) {
     Arrays.sort(edges, Comparator.comparingInt(e -> e.weight));
